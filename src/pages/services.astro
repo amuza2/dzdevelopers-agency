@@ -4,68 +4,60 @@ import PageHeader from '../components/PageHeader.astro'
 import CtaBand from '../components/CtaBand.astro'
 import Icon from '../components/Icon.astro'
 
-const pillars = [
+const services = [
   {
     icon: 'code' as const,
-    title: 'Web applications',
-    image: '/images/work-web-platform.svg',
-    alt: 'Dashboard interface from a web application',
-    body: 'Full-stack products built with Django, PostgreSQL and Vue: authentication, permissions, admin tooling and the unglamorous parts that make a product usable.',
-    points: [
-      'Custom dashboards and reporting',
-      'Multi-user roles and audit trails',
-      'Search, filters and exports',
-      'Progressive enhancement — works before JS loads',
-    ],
+    title: 'Web application development',
+    body: 'Full-stack products built with Django, PostgreSQL and Vue — authentication, permissions, admin tooling and the unglamorous parts that make a product usable.',
+    points: ['Custom dashboards', 'Multi-user roles', 'Reporting and exports'],
   },
   {
     icon: 'smartphone' as const,
-    title: 'Mobile applications',
-    image: '/images/work-mobile-app.svg',
-    alt: 'Two phone screens from a mobile application',
-    body: 'Cross-platform apps in Flutter that share a codebase, a design language and an API with your web product — so both stay in sync as the product grows.',
-    points: [
-      'One Flutter codebase for iOS and Android',
-      'Offline-first data and sync',
-      'Push notifications and deep links',
-      'App Store and Play Store releases',
-    ],
+    title: 'Mobile application development',
+    body: 'Cross-platform apps in Flutter that share a codebase, a design language and an API with your web product, so both stay in sync as it grows.',
+    points: ['One codebase, iOS & Android', 'Offline-first data', 'Store releases'],
   },
-  {
-    icon: 'cloud' as const,
-    title: 'Cloud & infrastructure',
-    image: '/images/studio-system-map.svg',
-    alt: 'Diagram of connected services: clients, an API layer and a database',
-    body: 'Containerised deployments with TLS, managed databases and tested backups. You get a runbook, not a dependency on us.',
-    points: [
-      'Docker and Compose deployments',
-      'Let’s Encrypt TLS and DNS',
-      'Scheduled backups, restore-tested',
-      'Monitoring and alerting',
-    ],
-  },
-]
-
-const extras = [
   {
     icon: 'layers' as const,
     title: 'APIs & integrations',
-    body: 'Versioned REST APIs, token authentication, webhooks and integrations with payments, email and storage providers.',
+    body: 'REST APIs that are documented and stable, plus integrations with the services you already depend on — payments, email, storage, third parties.',
+    points: ['Versioned REST APIs', 'Token authentication', 'Webhook handling'],
+  },
+  {
+    icon: 'cloud' as const,
+    title: 'Cloud & deployment',
+    body: 'Containerised deployments with TLS, managed databases and automated backups, including a runbook so you are not locked to us for operations.',
+    points: ['Docker / Compose', 'Let’s Encrypt TLS', 'Scheduled backups'],
   },
   {
     icon: 'gauge' as const,
     title: 'Performance & SEO',
-    body: 'Core Web Vitals, semantic markup, canonicals, structured data and sitemaps — configured rather than promised.',
+    body: 'Server-rendered or statically generated pages, correct metadata, structured data and a fast first paint — the things that decide whether you get found.',
+    points: ['Core Web Vitals', 'Structured data', 'Sitemaps & canonicals'],
   },
   {
     icon: 'wrench' as const,
-    title: 'Maintenance',
-    body: 'Dependency upgrades, monitoring and small features after launch. Priced monthly, cancellable whenever you like.',
+    title: 'Maintenance & audits',
+    body: 'Ongoing upgrades, monitoring and small features after launch — or an honest review of an existing codebase: what is fragile, what is a risk, what to fix first.',
+    points: ['Dependency upgrades', 'Uptime monitoring', 'Prioritised findings'],
+  },
+]
+
+const engagements = [
+  {
+    step: '01',
+    title: 'Scoped build',
+    body: 'A defined product or feature set, delivered in iterations with a fixed price and a written definition of done.',
   },
   {
-    icon: 'shield' as const,
-    title: 'Technical audits',
-    body: 'An honest review of an existing codebase or deployment: what is fragile, what is a security risk, and what to fix first.',
+    step: '02',
+    title: 'Launch',
+    body: 'Deployment to your domain with TLS, backups and monitoring in place, plus a runbook your team can follow.',
+  },
+  {
+    step: '03',
+    title: 'Retainer',
+    body: 'Upgrades, monitoring and small features after launch, on a monthly basis you can cancel whenever you like.',
   },
 ]
 ---
@@ -76,76 +68,27 @@ const extras = [
 >
   <PageHeader
     eyebrow="Services"
-    title="Design, build, ship — and keep it running"
+    title="What we can take off your plate"
     lead="Each engagement starts with a short scoping conversation, so we both know what is being built and what is explicitly out of scope."
   />
 
-  <!-- Three pillars, alternating image / copy. -->
-  <section class="section">
-    <div class="wrap space-y-20 lg:space-y-28">
-      {
-        pillars.map((pillar, index) => (
-          <article class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            <div class={index % 2 === 1 ? 'lg:order-2' : ''} data-reveal>
-              <span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-inset ring-brand-100">
-                <Icon name={pillar.icon} size={20} />
+  <!-- Detailed services, three columns divided by hairlines. -->
+  <section class="section" aria-label="Services we offer">
+    <div class="wrap">
+      <ul class="grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          services.map((service, index) => (
+            <li data-reveal style={`--reveal-delay:${(index % 3) * 70}ms`}>
+              <span class="icon-ring border-ink-200 text-brand-500">
+                <Icon name={service.icon} size={25} />
               </span>
-              <h2 class="t-h2 mt-6 text-[28px] sm:text-[34px]">{pillar.title}</h2>
-              <p class="mt-5 text-[15px] leading-[1.75] text-ink-500">{pillar.body}</p>
-              <ul class="mt-7 space-y-3">
-                {pillar.points.map((point) => (
-                  <li class="flex items-start gap-3 text-[14px] text-ink-600">
-                    <Icon name="check" size={16} class="mt-1 shrink-0 text-brand-600" />
-                    {point}
-                  </li>
+              <h2 class="mt-6 font-display text-[20px] font-light text-ink-700">{service.title}</h2>
+              <p class="mt-3 text-[13.5px] leading-[1.9] text-ink-500">{service.body}</p>
+              <ul class="mt-5 space-y-1.5 border-t border-ink-100 pt-4">
+                {service.points.map((point) => (
+                  <li class="text-[12px] uppercase tracking-[0.12em] text-ink-400">— {point}</li>
                 ))}
               </ul>
-            </div>
-
-            <div
-              class={`overflow-hidden rounded-[26px] border border-ink-100 bg-ink-50 ${
-                index % 2 === 1 ? 'lg:order-1' : ''
-              }`}
-              data-reveal
-              style="--reveal-delay:120ms"
-            >
-              <img
-                src={pillar.image}
-                alt={pillar.alt}
-                width="1200"
-                height="800"
-                class="aspect-[4/3] w-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </section>
-
-  <!-- The supporting services, in a compact grid. -->
-  <section class="section hairline bg-ink-50">
-    <div class="wrap">
-      <div class="max-w-2xl" data-reveal>
-        <p class="eyebrow text-brand-600">Also part of the work</p>
-        <h2 class="t-h2 mt-5">The parts that keep a product healthy.</h2>
-      </div>
-
-      <ul class="mt-12 grid gap-5 sm:grid-cols-2">
-        {
-          extras.map((extra, index) => (
-            <li class="card card-lift" data-reveal style={`--reveal-delay:${index * 70}ms`}>
-              <div class="flex items-start gap-4">
-                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-brand-600 ring-1 ring-inset ring-ink-100">
-                  <Icon name={extra.icon} size={18} />
-                </span>
-                <div>
-                  <h3 class="font-display text-[16px] font-medium text-ink-950">{extra.title}</h3>
-                  <p class="mt-2 text-[14px] leading-[1.7] text-ink-500">{extra.body}</p>
-                </div>
-              </div>
             </li>
           ))
         }
@@ -153,42 +96,58 @@ const extras = [
     </div>
   </section>
 
-  <!-- Engagement shape -->
-  <section class="section">
-    <div class="wrap grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-      <div data-reveal>
-        <p class="eyebrow text-brand-600">Engagements</p>
-        <h2 class="t-h2 mt-5">Fixed scope, or a monthly retainer.</h2>
-        <p class="t-lead mt-5 text-ink-500">
-          Most clients start with a scoped build and move to a maintenance
-          retainer once the product is live. Both are priced up front, in
-          writing.
+  <!-- Engagement shape, on the charcoal band. -->
+  <section class="band-dark" aria-labelledby="engagements-heading">
+    <div class="wrap py-20">
+      <div class="max-w-2xl" data-reveal>
+        <p class="eyebrow text-brand-500">Engagements</p>
+        <h2 id="engagements-heading" class="t-h2 mt-4 text-white">
+          Fixed scope, or a monthly retainer
+        </h2>
+        <p class="mt-5 text-[15px] leading-[1.9] text-white/60">
+          Most clients start with a scoped build and move to a retainer once the
+          product is live. Both are priced up front, in writing.
         </p>
       </div>
 
-      <div class="grid gap-5 sm:grid-cols-2" data-reveal style="--reveal-delay:100ms">
-        <div class="card">
-          <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-400">Project</p>
-          <h3 class="mt-3 font-display text-[19px] font-medium text-ink-950">Scoped build</h3>
-          <p class="mt-3 text-[14px] leading-[1.7] text-ink-500">
-            A defined product or feature set, delivered in iterations with a
-            fixed price and a written definition of done.
-          </p>
-        </div>
-        <div class="card border-brand-200 bg-brand-50/60">
-          <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-700">Ongoing</p>
-          <h3 class="mt-3 font-display text-[19px] font-medium text-ink-950">Retainer</h3>
-          <p class="mt-3 text-[14px] leading-[1.7] text-ink-600">
-            Upgrades, monitoring, small features and a person who answers when
-            something breaks. Cancel any month.
-          </p>
-        </div>
-      </div>
+      <ol class="mt-14 grid gap-10 sm:grid-cols-3">
+        {
+          engagements.map((item, index) => (
+            <li class="border-t border-white/20 pt-6" data-reveal style={`--reveal-delay:${index * 80}ms`}>
+              <span class="font-display text-[34px] font-light leading-none text-brand-500">{item.step}</span>
+              <h3 class="mt-4 font-display text-[19px] font-light text-white">{item.title}</h3>
+              <p class="mt-3 text-[13.5px] leading-[1.9] text-white/60">{item.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Photography band, as the template closes its service pages. -->
+  <section class="relative isolate overflow-hidden bg-ink-900">
+    <img
+      src="/images/home_agency_section_2.jpg"
+      alt=""
+      width="1920"
+      height="867"
+      class="absolute inset-0 -z-10 h-full w-full object-cover opacity-25"
+      aria-hidden="true"
+    />
+    <div class="absolute inset-0 -z-10 bg-ink-900/60" aria-hidden="true"></div>
+    <div class="wrap py-16 text-center">
+      <p class="mx-auto max-w-3xl font-display text-[22px] font-light leading-[1.6] text-white sm:text-[26px]" data-reveal>
+        Not sure which of these you need? Describe the problem and we will tell
+        you what it actually requires — even if the answer is “not much”.
+      </p>
+      <a href="/contact" class="btn btn-outline mt-8" data-reveal style="--reveal-delay:80ms">
+        Start a conversation
+      </a>
     </div>
   </section>
 
   <CtaBand
-    title="Not sure which of these you need?"
-    lead="Describe the problem and we will tell you what it actually requires — even if the answer is “not much”."
+    title="Tell us what you are building"
+    lead="A few sentences about the problem is enough to start."
   />
 </Base>

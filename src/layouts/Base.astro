@@ -47,20 +47,21 @@ const organization = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/images/favicon.ico" sizes="any" />
-    <meta name="theme-color" content="#06090c" />
+    <meta name="theme-color" content="#2c2c2c" />
 
-    <!-- Reveal animations only apply when JS is available, so the page is never
-         left invisible for crawlers or no-script readers. -->
+    <!-- Reveal styles only arm when JS is available, so nothing is ever left
+         invisible for crawlers or no-script readers. -->
     <script is:inline>
       document.documentElement.classList.add('js')
     </script>
 
-    <!-- Sora for display, Inter for body, JetBrains Mono for the small labels. -->
+    <!-- Lato 300 is the template's display face; Roboto handles body copy and
+         the small uppercase labels. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Roboto:wght@300;400;500&display=swap"
     />
 
     <meta property="og:type" content="website" />
@@ -79,7 +80,7 @@ const organization = {
   <body class="flex min-h-screen flex-col overflow-x-hidden">
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-5 focus:py-2.5 focus:text-sm focus:font-medium focus:text-ink-950"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-ink-900 focus:px-4 focus:py-2 focus:text-sm focus:text-white"
     >
       Skip to content
     </a>
@@ -91,8 +92,7 @@ const organization = {
     <Footer />
 
     <script>
-      // Staggered reveal-on-scroll. Re-runs after every client-side navigation
-      // because the new page's nodes are fresh.
+      // Staggered reveal-on-scroll, re-run after every client-side navigation.
       function initReveal() {
         const items = document.querySelectorAll('[data-reveal]:not(.is-visible)')
 
@@ -112,9 +112,9 @@ const organization = {
           { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
         )
 
-        // Anything already on screen is shown immediately: the page-level view
-        // transition already animates the entrance, and this means the hero is
-        // never left invisible if the observer is delayed or the tab is paused.
+        // Anything already on screen is shown straight away — the page-level
+        // transition already animates the entrance, and this guarantees the
+        // hero is never left hidden.
         const viewportHeight = window.innerHeight || document.documentElement.clientHeight
 
         items.forEach((item) => {
@@ -127,9 +127,8 @@ const organization = {
         })
       }
 
-      // ClientRouter swaps <html>'s attributes with the incoming document, which
-      // would strip the .js marker and leave [data-reveal] elements visible-then-
-      // hidden on every navigation. Re-apply it to the incoming document.
+      // ClientRouter replaces <html>'s attributes with the incoming document's,
+      // which would strip the .js marker and stop the reveal styles applying.
       document.addEventListener('astro:before-swap', (event) => {
         event.newDocument.documentElement.classList.add('js')
       })
@@ -137,8 +136,6 @@ const organization = {
       document.addEventListener('astro:page-load', initReveal)
       document.addEventListener('astro:after-swap', initReveal)
 
-      // First paint: astro:page-load can fire before this module is evaluated,
-      // so run once immediately as well.
       initReveal()
     </script>
   </body>

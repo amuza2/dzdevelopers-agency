@@ -1,39 +1,45 @@
 ---
 /*
-  The header used at the top of every inner page: dark band, mono eyebrow,
-  oversized display heading, optional lead. A soft emerald glow keeps it from
-  reading as a flat black rectangle.
+  The subheader band used at the top of every inner page: the template's
+  cityscape photograph under a charcoal veil, thin Lato heading centred on top.
 */
 interface Props {
   eyebrow: string
   title: string
   lead?: string
+  image?: string
 }
 
-const { eyebrow, title, lead } = Astro.props
+const {
+  eyebrow,
+  title,
+  lead,
+  image = '/images/home_agency_subheader.jpg',
+} = Astro.props
 ---
 
-<section class="relative overflow-hidden bg-ink-950 text-white">
-  <div class="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden="true"></div>
-  <div
-    class="pointer-events-none absolute -top-56 left-1/2 h-[520px] w-[860px] -translate-x-1/2 rounded-full bg-brand-500/20 blur-[140px]"
+<section class="relative isolate overflow-hidden bg-ink-900">
+  <img
+    src={image}
+    alt=""
+    width="2000"
+    height="550"
+    class="absolute inset-0 -z-10 h-full w-full object-cover opacity-45"
     aria-hidden="true"
-  >
-  </div>
-  <div class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-ink-950/60" aria-hidden="true">
-  </div>
+  />
+  <div class="absolute inset-0 -z-10 bg-ink-900/55" aria-hidden="true"></div>
 
   <div class="wrap relative py-20 text-center sm:py-24">
-    <p class="eyebrow justify-center text-brand-300" data-reveal>{eyebrow}</p>
-    <h1 class="t-hero mx-auto mt-6 max-w-4xl text-white" data-reveal style="--reveal-delay:80ms">
+    <p class="eyebrow text-brand-200" data-reveal>{eyebrow}</p>
+    <h1 class="t-hero mx-auto mt-5 max-w-3xl text-white" data-reveal style="--reveal-delay:80ms">
       {title}
     </h1>
     {
       lead && (
         <p
-          class="t-lead mx-auto mt-6 max-w-2xl text-white/55"
+          class="mx-auto mt-6 max-w-2xl text-[15.5px] leading-[1.9] text-white/65"
           data-reveal
-          style="--reveal-delay:160ms"
+          style="--reveal-delay:150ms"
         >
           {lead}
         </p>

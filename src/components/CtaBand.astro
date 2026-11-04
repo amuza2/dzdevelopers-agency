@@ -1,7 +1,5 @@
 ---
-import Icon from './Icon.astro'
-
-/* Closing call-to-action, reused at the foot of every page. */
+/* Closing green band, reused at the foot of every page. */
 interface Props {
   title: string
   lead?: string
@@ -17,33 +15,14 @@ const {
 } = Astro.props
 ---
 
-<section class="wrap pb-20 lg:pb-28">
-  <div
-    class="relative overflow-hidden rounded-[32px] bg-ink-950 px-6 py-16 text-center sm:px-12 sm:py-20"
-    data-reveal
-  >
-    <div class="pointer-events-none absolute inset-0 bg-grid opacity-60" aria-hidden="true"></div>
-    <div
-      class="pointer-events-none absolute -bottom-40 left-1/2 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-brand-500/25 blur-[130px]"
-      aria-hidden="true"
-    >
-    </div>
-
-    <div class="relative">
-      <p class="eyebrow justify-center text-brand-300">Next step</p>
-      <h2 class="t-h2 mx-auto mt-5 max-w-2xl text-white">{title}</h2>
-      <p class="mx-auto mt-5 max-w-xl text-[15px] leading-[1.75] text-white/55">{lead}</p>
-
-      <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
-        <a href={href} class="btn btn-primary">
-          {label}
-          <Icon name="arrow-right" size={16} />
-        </a>
-        <a href="mailto:info@dzdevelopers.com" class="btn btn-ghost">
-          <Icon name="mail" size={16} />
-          Email us
-        </a>
-      </div>
+<section class="band-green pattern-geo">
+  <div class="wrap py-16 text-center sm:py-20">
+    <h2 class="t-h2 text-white" data-reveal>{title}</h2>
+    <p class="mx-auto mt-5 max-w-xl text-[15px] leading-[1.9] text-white/75" data-reveal style="--reveal-delay:80ms">
+      {lead}
+    </p>
+    <div class="mt-9" data-reveal style="--reveal-delay:150ms">
+      <a href={href} class="btn btn-outline">{label}</a>
     </div>
   </div>
 </section>

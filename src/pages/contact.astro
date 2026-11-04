@@ -1,31 +1,19 @@
 ---
 import Base from '../layouts/Base.astro'
 import PageHeader from '../components/PageHeader.astro'
-import Icon from '../components/Icon.astro'
 
 const details = [
-  {
-    label: 'Email',
-    value: 'info@dzdevelopers.com',
-    href: 'mailto:info@dzdevelopers.com',
-    icon: 'mail' as const,
-  },
-  {
-    label: 'GitHub',
-    value: 'github.com/amuza2',
-    href: 'https://github.com/amuza2',
-    icon: 'github' as const,
-  },
+  { label: 'Email', value: 'info@dzdevelopers.com', href: 'mailto:info@dzdevelopers.com' },
+  { label: 'GitHub', value: 'github.com/amuza2', href: 'https://github.com/amuza2' },
   {
     label: 'LinkedIn',
     value: 'in/mohammed-chami-dev',
     href: 'https://www.linkedin.com/in/mohammed-chami-dev/',
-    icon: 'linkedin' as const,
   },
 ]
 
 const field =
-  'mt-2 w-full rounded-xl border border-ink-200 bg-white px-4 py-3 text-[15px] text-ink-900 outline-none transition-all duration-200 placeholder:text-ink-300 focus:border-brand-500 focus:ring-4 focus:ring-brand-100'
+  'mt-2 w-full border border-ink-200 bg-white px-4 py-3 font-sans text-[15px] text-ink-700 outline-none transition-colors duration-300 focus:border-brand-500'
 ---
 
 <Base
@@ -39,140 +27,123 @@ const field =
   />
 
   <section class="section">
-    <div class="wrap grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+    <div class="wrap grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
       <div data-reveal>
-        <div class="rounded-[28px] border border-ink-100 bg-ink-50/70 p-6 sm:p-10">
-          <h2 class="t-h3 text-[20px]">Start the conversation</h2>
-          <p class="mt-2 text-[14px] text-ink-500">
-            No form service, no tracking — this composes an email from your own
-            mail client.
+        <h2 class="font-display text-[21px] font-light text-ink-700">Start the conversation</h2>
+        <p class="mt-2 text-[14px] leading-[1.85] text-ink-500">
+          No form service, no tracking — this composes an email from your own
+          mail client.
+        </p>
+
+        <form id="contact-form" class="mt-8 space-y-6" novalidate>
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div>
+              <label for="name" class="text-[10.5px] uppercase tracking-[0.2em] text-ink-400">
+                Your name
+              </label>
+              <input id="name" name="name" type="text" required autocomplete="name" placeholder="Jane Doe" class={field} />
+            </div>
+            <div>
+              <label for="email" class="text-[10.5px] uppercase tracking-[0.2em] text-ink-400">
+                Email
+              </label>
+              <input id="email" name="email" type="email" required autocomplete="email" placeholder="jane@company.com" class={field} />
+            </div>
+          </div>
+
+          <div>
+            <label for="kind" class="text-[10.5px] uppercase tracking-[0.2em] text-ink-400">
+              What do you need?
+            </label>
+            <select id="kind" name="kind" class={field}>
+              <option>Web application</option>
+              <option>Mobile application</option>
+              <option>API or integration</option>
+              <option>Deployment or infrastructure</option>
+              <option>Maintenance of an existing product</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="message" class="text-[10.5px] uppercase tracking-[0.2em] text-ink-400">
+              About the project
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              required
+              placeholder="What should it do, what exists already, and when do you need it?"
+              class={field}
+            ></textarea>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-5">
+            <button type="submit" class="btn btn-solid">Send message</button>
+            <p id="form-status" class="text-[13px] text-ink-500" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <noscript>
+          <p class="mt-6 border border-ink-200 bg-ink-50 p-4 text-[13.5px] text-ink-600">
+            JavaScript is off, so the form cannot compose an email. Write to
+            <a class="text-brand-500 underline" href="mailto:info@dzdevelopers.com">info@dzdevelopers.com</a>
+            directly.
           </p>
-
-          <form id="contact-form" class="mt-8 space-y-5" novalidate>
-            <div class="grid gap-5 sm:grid-cols-2">
-              <div>
-                <label for="name" class="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-500">
-                  Your name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  autocomplete="name"
-                  placeholder="Jane Doe"
-                  class={field}
-                />
-              </div>
-              <div>
-                <label for="email" class="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-500">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  autocomplete="email"
-                  placeholder="jane@company.com"
-                  class={field}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label for="kind" class="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-500">
-                What do you need?
-              </label>
-              <select id="kind" name="kind" class={field}>
-                <option>Web application</option>
-                <option>Mobile application</option>
-                <option>API or integration</option>
-                <option>Deployment or infrastructure</option>
-                <option>Maintenance of an existing product</option>
-                <option>Not sure yet</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="message" class="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-500">
-                About the project
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows="6"
-                required
-                placeholder="What should it do, what exists already, and when do you need it?"
-                class={field}
-              ></textarea>
-            </div>
-
-            <div class="flex flex-wrap items-center gap-4">
-              <button type="submit" class="btn btn-dark">
-                Send message
-                <Icon name="arrow-right" size={15} />
-              </button>
-              <p id="form-status" class="text-[13px] text-ink-500" role="status" aria-live="polite"></p>
-            </div>
-          </form>
-
-          <noscript>
-            <p class="mt-5 rounded-xl border border-ink-200 bg-white p-4 text-[13px] text-ink-700">
-              JavaScript is off, so the form cannot compose an email. Write to
-              <a class="text-brand-600 underline" href="mailto:info@dzdevelopers.com">info@dzdevelopers.com</a>
-              directly.
-            </p>
-          </noscript>
-        </div>
+        </noscript>
       </div>
 
-      <aside class="lg:pt-2" data-reveal style="--reveal-delay:120ms">
-        <h2 class="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-400">
-          Or reach out directly
-        </h2>
+      <aside data-reveal style="--reveal-delay:100ms">
+        <h2 class="text-[10.5px] uppercase tracking-[0.2em] text-ink-400">Or reach out directly</h2>
 
-        <ul class="mt-6 space-y-3">
+        <ul class="mt-6 divide-y divide-ink-100 border-y border-ink-100">
           {
             details.map((detail) => (
               <li>
                 <a
                   href={detail.href}
                   rel="noopener noreferrer"
-                  class="group flex items-center gap-4 rounded-2xl border border-ink-100 bg-white p-4 no-underline transition-all duration-300 hover:-translate-y-0.5 hover:border-ink-200 hover:shadow-[0_20px_50px_-30px_rgba(6,9,12,0.45)]"
+                  class="group flex items-baseline justify-between gap-6 py-4 no-underline"
                 >
-                  <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-ink-50 text-ink-600 transition-colors duration-300 group-hover:bg-brand-50 group-hover:text-brand-600">
-                    <Icon name={detail.icon} size={17} />
+                  <span class="text-[10.5px] uppercase tracking-[0.18em] text-ink-400">{detail.label}</span>
+                  <span class="font-display text-[16px] font-light text-ink-700 transition-colors duration-300 group-hover:text-brand-500">
+                    {detail.value}
                   </span>
-                  <span class="min-w-0">
-                    <span class="block font-mono text-[10px] uppercase tracking-[0.18em] text-ink-400">
-                      {detail.label}
-                    </span>
-                    <span class="mt-0.5 block truncate font-display text-[14px] font-medium text-ink-950">
-                      {detail.value}
-                    </span>
-                  </span>
-                  <Icon name="arrow-up-right" size={15} class="ml-auto shrink-0 text-ink-300 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-ink-950" />
                 </a>
               </li>
             ))
           }
         </ul>
 
-        <div class="mt-8 rounded-2xl border border-ink-100 bg-ink-50 p-6">
-          <h3 class="font-display text-[14px] font-medium text-ink-950">Helpful to include</h3>
-          <ul class="mt-4 space-y-2.5 text-[13.5px] leading-[1.6] text-ink-500">
-            <li class="flex gap-2.5"><Icon name="check" size={15} class="mt-0.5 shrink-0 text-brand-600" /> What the product should do</li>
-            <li class="flex gap-2.5"><Icon name="check" size={15} class="mt-0.5 shrink-0 text-brand-600" /> Whether anything already exists</li>
-            <li class="flex gap-2.5"><Icon name="check" size={15} class="mt-0.5 shrink-0 text-brand-600" /> Your rough timeline and budget</li>
+        <div class="mt-10">
+          <h3 class="text-[10.5px] uppercase tracking-[0.2em] text-ink-400">Helpful to include</h3>
+          <ul class="mt-4 space-y-2 text-[13.5px] leading-[1.9] text-ink-500">
+            <li>— What the product should do</li>
+            <li>— Whether anything already exists</li>
+            <li>— Your rough timeline and budget</li>
           </ul>
         </div>
 
-        <p class="mt-6 flex items-center gap-2 text-[13px] text-ink-400">
-          <Icon name="pin" size={15} />
-          Algeria — working remotely, CET
-        </p>
+        <p class="mt-8 text-[13px] text-ink-400">Algeria — working remotely, CET</p>
       </aside>
+    </div>
+  </section>
+
+  <!-- Studio photograph to close the page, as the template does. -->
+  <section class="band-light">
+    <div class="wrap py-16">
+      <figure class="overflow-hidden" data-reveal>
+        <img
+          src="/images/home_agency_section_2.jpg"
+          alt="The city the studio works from, with the studio's geometric motif"
+          width="1920"
+          height="867"
+          class="h-[260px] w-full object-cover sm:h-[340px]"
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
     </div>
   </section>
 </Base>

@@ -15,42 +15,30 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
 
 <header
   transition:name="site-header"
-  class="sticky top-0 z-50 border-b border-white/[0.07] bg-ink-950/85 backdrop-blur-xl"
+  class="sticky top-0 z-50 border-b border-white/[0.07] bg-ink-900"
 >
-  <div class="wrap flex h-[68px] items-center justify-between gap-6">
-    <a
-      href="/"
-      class="group flex items-center gap-3 no-underline"
-      aria-label="DZ Developers — home"
-    >
-      <span
-        class="grid h-9 w-9 place-items-center rounded-[11px] bg-gradient-to-br from-brand-300 via-brand-500 to-brand-700 font-display text-[13px] font-semibold text-ink-950 transition-transform duration-300 group-hover:-rotate-6"
-      >
-        DZ
-      </span>
-      <span class="font-display text-[16px] font-medium tracking-[-0.02em] text-white">
-        DZ <span class="text-white/55">Developers</span>
-      </span>
+  <div class="wrap flex h-[72px] items-center justify-between gap-8">
+    <a href="/" class="flex items-baseline gap-1 no-underline" aria-label="DZ Developers — home">
+      <span class="font-display text-[22px] font-light tracking-[0.01em] text-white">DZ</span>
+      <span class="font-display text-[22px] font-light tracking-[0.01em] text-brand-500">Developers</span>
     </a>
 
     <nav aria-label="Main" class="hidden md:block">
-      <ul class="flex items-center gap-1">
+      <ul class="flex items-center gap-8">
         {
           links.map((link) => (
             <li>
               <a
                 href={link.href}
                 aria-current={isCurrent(link.href) ? 'page' : undefined}
-                class={`relative rounded-full px-4 py-2 text-[13px] no-underline transition-colors duration-200 ${
-                  isCurrent(link.href)
-                    ? 'text-white'
-                    : 'text-white/55 hover:text-white'
+                class={`relative flex h-[72px] items-center text-[11.5px] uppercase tracking-[0.16em] no-underline transition-colors duration-300 ${
+                  isCurrent(link.href) ? 'text-white' : 'text-ink-400 hover:text-white'
                 }`}
               >
                 {link.label}
                 {
                   isCurrent(link.href) && (
-                    <span class="absolute inset-x-4 -bottom-px h-px bg-gradient-to-r from-transparent via-brand-400 to-transparent" />
+                    <span class="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-500" />
                   )
                 }
               </a>
@@ -60,24 +48,23 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
       </ul>
     </nav>
 
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-3">
       <a
         href="/contact"
-        class="hidden items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[13px] font-medium text-ink-950 no-underline transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-300 sm:inline-flex"
+        class="hidden border border-white/40 px-6 py-2.5 text-[11px] uppercase tracking-[0.16em] text-white no-underline transition-colors duration-300 hover:border-brand-500 hover:bg-brand-500 sm:inline-block"
       >
         Start a project
-        <Icon name="arrow-up-right" size={15} />
       </a>
 
       <button
         type="button"
         data-menu-toggle
-        class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/80 transition-colors hover:border-white/40 hover:text-white md:hidden"
+        class="inline-flex h-9 w-9 items-center justify-center border border-white/25 text-white/80 transition-colors hover:border-white/60 hover:text-white md:hidden"
         aria-expanded="false"
         aria-controls="mobile-menu"
         aria-label="Toggle navigation"
       >
-        <Icon name="menu" size={18} />
+        <Icon name="menu" size={17} />
       </button>
     </div>
   </div>
@@ -85,31 +72,28 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
   <div
     id="mobile-menu"
     data-menu-panel
-    class="grid grid-rows-[0fr] overflow-hidden border-t border-transparent transition-all duration-500 md:hidden"
+    class="grid grid-rows-[0fr] overflow-hidden transition-all duration-300 md:hidden"
   >
     <div class="min-h-0">
-      <ul class="wrap space-y-1 py-4">
+      <ul class="wrap border-t border-white/10 py-3">
         {
           links.map((link) => (
             <li>
               <a
                 href={link.href}
-                class={`flex items-center justify-between rounded-xl px-3 py-2.5 text-[14px] no-underline transition-colors ${
-                  isCurrent(link.href)
-                    ? 'bg-white/[0.06] text-white'
-                    : 'text-white/65 hover:bg-white/[0.04] hover:text-white'
+                class={`block border-b border-white/[0.06] py-3 text-[12px] uppercase tracking-[0.16em] no-underline transition-colors ${
+                  isCurrent(link.href) ? 'text-brand-500' : 'text-ink-400 hover:text-white'
                 }`}
               >
                 {link.label}
-                <Icon name="arrow-right" size={15} class="opacity-40" />
               </a>
             </li>
           ))
         }
-        <li class="pt-2">
+        <li class="pt-4 pb-2">
           <a
             href="/contact"
-            class="flex items-center justify-center rounded-full bg-white px-4 py-3 text-[13px] font-medium text-ink-950 no-underline"
+            class="block border border-white/40 px-4 py-3 text-center text-[11px] uppercase tracking-[0.16em] text-white no-underline"
           >
             Start a project
           </a>
@@ -129,7 +113,6 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
     const setOpen = (open: boolean) => {
       toggle.setAttribute('aria-expanded', String(open))
       panel.style.gridTemplateRows = open ? '1fr' : '0fr'
-      panel.style.borderTopColor = open ? 'rgb(255 255 255 / 0.07)' : 'transparent'
     }
 
     toggle.addEventListener('click', () => {
