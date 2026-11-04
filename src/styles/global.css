@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens lifted from the original BeAgency stylesheet (agency.css).
+
+   The accent is #239963 (with #177d4e on hover), bands alternate between
+   #2c2c2c charcoal and white, body copy is #444444, and everything is set in
+   Lato: 300 for headings, 400 for body. The `brand-*` / `ink-*` names are kept
+   as the shared vocabulary so every page re-skins from this one block.
+   --------------------------------------------------------------------------- */
+@theme {
+  --font-sans: Lato, Arial, Tahoma, sans-serif;
+  --font-alt: Roboto, Arial, Tahoma, sans-serif;
+  --font-serif: Georgia, serif;
+
+  --color-brand-50: #f1f8f5;
+  --color-brand-100: #dcefe6;
+  --color-brand-200: #b9dfcd;
+  --color-brand-500: #239963;
+  --color-brand-600: #239963;
+  --color-brand-700: #177d4e;
+
+  --color-ink-900: #2c2c2c;
+  --color-ink-700: #444444;
+  --color-ink-500: #747474;
+  --color-ink-300: #a8a8a8;
+  --color-ink-100: #e8e8e8;
+  --color-ink-50: #f7f7f7;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white font-sans text-[14px] leading-[23px] text-ink-700 antialiased;
+  }
+
+  /* Lato 300 is the template's signature — never bold these. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-light text-ink-900;
+  }
+
+  a {
+    @apply text-brand-600;
+  }
+
+  /* The original template stripped focus rings; keep them — invisible focus is
+     an accessibility failure even when it looks tidier. */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* ---- layout ---------------------------------------------------------- */
+  .wrap {
+    @apply mx-auto w-full max-w-[1240px] px-6;
+  }
+
+  .band-dark {
+    @apply bg-ink-900 text-white;
+  }
+
+  .band-green {
+    @apply bg-brand-600 text-white;
+  }
+
+  .band-light {
+    @apply bg-ink-50;
+  }
+
+  /* The green bands carry a faint diagonal lattice, as in the template. */
+  .pattern-geo {
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        rgb(255 255 255 / 0.055) 0 1px,
+        transparent 1px 24px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        rgb(255 255 255 / 0.055) 0 1px,
+        transparent 1px 24px
+      );
+  }
+
+  /* ---- type ------------------------------------------------------------ */
+  .h-hero {
+    @apply font-light leading-[1.14] text-white;
+  }
+
+  .h-section {
+    @apply font-light leading-[1.15] text-ink-900;
+  }
+
+  .h-card {
+    @apply font-light leading-[25px];
+  }
+
+  /* In the template every card title is a link ruled off with 1px — it is the
+     detail that makes these sections read as BeTheme and not as a generic
+     card grid. */
+  .u-title {
+    @apply inline-block border-b border-current pb-0.5 text-brand-600 no-underline transition-colors hover:text-brand-700;
+  }
+
+  .band-green .u-title,
+  .band-dark .u-title {
+    @apply text-white hover:text-white/80;
+  }
+
+  /* ---- buttons --------------------------------------------------------- */
+  .btn-outline {
+    @apply inline-block border border-white px-8 py-3 text-[14px] text-white no-underline transition-colors hover:bg-white hover:text-ink-900;
+  }
+
+  .btn-solid {
+    @apply inline-block bg-brand-600 px-8 py-3 text-[14px] text-white no-underline transition-colors hover:bg-brand-700;
+  }
+
+  /* Same shape as .btn-outline, for use on white rather than charcoal. */
+  .btn-outline-dark {
+    @apply inline-block border border-ink-900 px-8 py-3 text-[14px] text-ink-900 no-underline transition-colors hover:bg-ink-900 hover:text-white;
+  }
+
+  /* ---- misc ------------------------------------------------------------ */
+  .rule {
+    @apply border-0 border-t border-ink-100;
+  }
+
+  .band-green .rule,
+  .band-dark .rule {
+    @apply border-white/25;
+  }
+}

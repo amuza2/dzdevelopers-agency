@@ -1,0 +1,25 @@
+---
+/* Closing green band, reused at the foot of every page. */
+interface Props {
+  title: string
+  lead?: string
+  href?: string
+  label?: string
+}
+
+const { title, lead, href = '/contact', label = 'Get in touch' } = Astro.props
+---
+
+<section class="band-green pattern-geo">
+  <div class="wrap py-16 text-center sm:py-20">
+    <h2 class="h-section text-[26px] text-white sm:text-[30px]">{title}</h2>
+    {
+      lead && (
+        <p class="mx-auto mt-4 max-w-xl text-[13px] leading-[23px] text-white/75">
+          {lead}
+        </p>
+      )
+    }
+    <a href={href} class="btn-outline mt-9">{label}</a>
+  </div>
+</section>

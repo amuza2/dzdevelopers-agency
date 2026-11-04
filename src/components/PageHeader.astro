@@ -1,0 +1,29 @@
+---
+/*
+  The charcoal page header used at the top of every inner page — the same move
+  as the home hero, just shorter, so the bands stay consistent page to page.
+*/
+interface Props {
+  eyebrow: string
+  title: string
+  lead?: string
+}
+
+const { eyebrow, title, lead } = Astro.props
+---
+
+<section class="band-dark">
+  <div class="wrap py-16 text-center sm:py-20">
+    <p class="text-[13px] uppercase tracking-[0.12em] text-brand-500">{eyebrow}</p>
+    <h1 class="h-hero mx-auto mt-4 max-w-3xl text-[28px] sm:text-[40px]">
+      {title}
+    </h1>
+    {
+      lead && (
+        <p class="mx-auto mt-6 max-w-2xl text-[13px] leading-[23px] text-white/60">
+          {lead}
+        </p>
+      )
+    }
+  </div>
+</section>

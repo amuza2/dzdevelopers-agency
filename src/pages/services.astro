@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro'
+import PageHeader from '../components/PageHeader.astro'
+
+const services = [
+  {
+    title: 'Web application development',
+    body: 'Full-stack products built with Django, PostgreSQL and Vue. Authentication, permissions, admin tooling and the unglamorous parts that make a product usable.',
+    points: ['Custom dashboards', 'Multi-user roles', 'Reporting and exports'],
+  },
+  {
+    title: 'APIs & integrations',
+    body: 'REST APIs that are documented and stable, plus integrations with the services you already depend on — payments, email, storage, third parties.',
+    points: ['Versioned REST APIs', 'Token authentication', 'Webhook handling'],
+  },
+  {
+    title: 'Cloud & deployment',
+    body: 'Containerised deployments with TLS, managed databases and automated backups. Includes a runbook so you are not locked to us for operations.',
+    points: ['Docker / Compose', 'Let\u2019s Encrypt TLS', 'Scheduled backups'],
+  },
+  {
+    title: 'Performance & SEO',
+    body: 'Server-rendered or statically generated pages, correct metadata, structured data and a fast first paint — the things that decide whether you get found.',
+    points: ['Core Web Vitals', 'Structured data', 'Sitemaps & canonicals'],
+  },
+  {
+    title: 'Maintenance',
+    body: 'Ongoing upgrades, monitoring and small features after launch. Priced monthly, cancellable whenever you like.',
+    points: ['Dependency upgrades', 'Uptime monitoring', 'Bug fixes'],
+  },
+  {
+    title: 'Technical audits',
+    body: 'An honest review of an existing codebase or deployment: what is fragile, what is a security risk, and what to fix first.',
+    points: ['Code review', 'Deployment review', 'Prioritised findings'],
+  },
+]
+---
+
+<Base
+  title="Services — DZ Developers"
+  description="Web application development, APIs and integrations, cloud deployment, performance and maintenance."
+>
+  <PageHeader
+    eyebrow="Services"
+    title="What we can take off your plate"
+    lead="Each engagement starts with a short scoping conversation so we both know what is being built and what is explicitly out of scope."
+  />
+
+  <!-- Green band, 3 × 2 and ruled — the same grid as the home page. -->
+  <section class="band-green pattern-geo">
+    <div class="wrap py-16 sm:py-20">
+      <ul class="grid gap-x-12 sm:grid-cols-3">
+        {
+          services.slice(0, 3).map((service) => (
+            <li class="py-8">
+              <h2 class="h-card text-[21px]">
+                <span class="u-title">{service.title}</span>
+              </h2>
+              <p class="mt-4 text-[13px] leading-[23px] text-white/75">
+                {service.body}
+              </p>
+              <ul class="mt-4 space-y-1">
+                {service.points.map((point) => (
+                  <li class="text-[13px] leading-[23px] text-white/60">— {point}</li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ul>
+      <ul class="grid gap-x-12 sm:grid-cols-3">
+        {
+          services.slice(3).map((service) => (
+            <li class="border-t border-white/25 py-8">
+              <h2 class="h-card text-[21px]">
+                <span class="u-title">{service.title}</span>
+              </h2>
+              <p class="mt-4 text-[13px] leading-[23px] text-white/75">
+                {service.body}
+              </p>
+              <ul class="mt-4 space-y-1">
+                {service.points.map((point) => (
+                  <li class="text-[13px] leading-[23px] text-white/60">— {point}</li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap py-16 text-center sm:py-20">
+    <h2 class="h-section text-[26px] sm:text-[30px]">
+      Not sure which of these you need?
+    </h2>
+    <p class="mx-auto mt-4 max-w-xl text-[13px] leading-[23px] text-ink-500">
+      Describe the problem and we will tell you what it actually requires.
+    </p>
+    <a href="/contact" class="btn-outline-dark mt-8">Start a conversation</a>
+  </section>
+</Base>

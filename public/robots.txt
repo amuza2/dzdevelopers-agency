@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://agency.dzdevelopers.com/sitemap-index.xml
