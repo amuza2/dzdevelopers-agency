@@ -1,9 +1,11 @@
 ---
+import Icon from './Icon.astro'
+
 const year = new Date().getFullYear()
 
 const columns = [
   {
-    title: 'Company',
+    title: 'Studio',
     links: [
       { href: '/about', label: 'About us' },
       { href: '/team', label: 'Team' },
@@ -14,29 +16,47 @@ const columns = [
     title: 'Services',
     links: [
       { href: '/services', label: 'Web applications' },
-      { href: '/services', label: 'APIs & integrations' },
-      { href: '/services', label: 'Cloud & DevOps' },
+      { href: '/services', label: 'Mobile applications' },
+      { href: '/services', label: 'Cloud & deployment' },
     ],
   },
 ]
 
 const socials = [
-  { href: 'https://github.com/amuza2', label: 'GitHub' },
-  { href: 'https://www.linkedin.com/in/mohammed-chami-dev/', label: 'LinkedIn' },
+  { href: 'https://github.com/amuza2', label: 'GitHub', icon: 'github' as const },
+  {
+    href: 'https://www.linkedin.com/in/mohammed-chami-dev/',
+    label: 'LinkedIn',
+    icon: 'linkedin' as const,
+  },
 ]
 ---
 
-<footer class="band-dark">
-  <div class="wrap grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4">
+<footer class="relative overflow-hidden border-t border-white/[0.07] bg-ink-950 text-white">
+  <div class="pointer-events-none absolute inset-0 bg-grid opacity-40" aria-hidden="true"></div>
+  <div
+    class="pointer-events-none absolute -top-40 left-1/2 h-[420px] w-[680px] -translate-x-1/2 rounded-full bg-brand-500/10 blur-[130px]"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="wrap relative grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr]">
     <div>
-      <p class="text-[20px] font-light text-white">
-        DZ<span class="text-brand-500">Developers</span>
+      <a href="/" class="flex items-center gap-3 no-underline" aria-label="DZ Developers — home">
+        <span
+          class="grid h-9 w-9 place-items-center rounded-[11px] bg-gradient-to-br from-brand-300 via-brand-500 to-brand-700 font-display text-[13px] font-semibold text-ink-950"
+        >
+          DZ
+        </span>
+        <span class="font-display text-[16px] font-medium tracking-[-0.02em] text-white">
+          DZ <span class="text-white/55">Developers</span>
+        </span>
+      </a>
+      <p class="mt-5 max-w-xs text-[14px] leading-[1.75] text-white/50">
+        A software studio building web and mobile products — and the
+        infrastructure that keeps them running.
       </p>
-      <p class="mt-4 text-[13px] leading-[23px] text-white/55">
-        A software studio building web applications, APIs and cloud
-        infrastructure for teams that need it done properly.
-      </p>
-      <ul class="mt-6 flex gap-5">
+      <ul class="mt-7 flex gap-3">
         {
           socials.map((social) => (
             <li>
@@ -44,9 +64,10 @@ const socials = [
                 href={social.href}
                 rel="noopener noreferrer"
                 target="_blank"
-                class="text-[13px] text-white/55 no-underline transition-colors hover:text-white"
+                aria-label={social.label}
+                class="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-white/60 no-underline transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:text-white"
               >
-                {social.label}
+                <Icon name={social.icon} size={17} />
               </a>
             </li>
           ))
@@ -57,15 +78,15 @@ const socials = [
     {
       columns.map((column) => (
         <div>
-          <h2 class="text-[13px] uppercase tracking-[0.09em] text-white/40">
+          <h2 class="font-mono text-[11px] uppercase tracking-[0.2em] text-white/35">
             {column.title}
           </h2>
-          <ul class="mt-5 space-y-2.5">
+          <ul class="mt-5 space-y-3">
             {column.links.map((link) => (
               <li>
                 <a
                   href={link.href}
-                  class="text-[13px] text-white/55 no-underline transition-colors hover:text-white"
+                  class="text-[14px] text-white/55 no-underline transition-colors duration-200 hover:text-white"
                 >
                   {link.label}
                 </a>
@@ -77,31 +98,32 @@ const socials = [
     }
 
     <div>
-      <h2 class="text-[13px] uppercase tracking-[0.09em] text-white/40">
+      <h2 class="font-mono text-[11px] uppercase tracking-[0.2em] text-white/35">
         Get in touch
       </h2>
-      <p class="mt-5 text-[13px] leading-[23px] text-white/55">
-        Tell us what you are building.<br />
-        We reply within one working day.
+      <p class="mt-5 text-[14px] leading-[1.75] text-white/50">
+        Tell us what you are building.<br />We reply within one working day.
       </p>
       <a
         href="mailto:info@dzdevelopers.com"
-        class="mt-3 inline-block border-b border-white/30 pb-0.5 text-[13px] text-white no-underline transition-colors hover:border-white"
+        class="mt-4 inline-flex items-center gap-2 border-b border-white/20 pb-1 text-[14px] text-white no-underline transition-colors hover:border-brand-300 hover:text-brand-200"
       >
         info@dzdevelopers.com
+        <Icon name="arrow-up-right" size={14} />
       </a>
+      <p class="mt-6 inline-flex items-center gap-2 text-[13px] text-white/35">
+        <Icon name="pin" size={15} />
+        Algeria — working remotely
+      </p>
     </div>
   </div>
 
-  <div class="border-t border-white/10">
-    <div class="wrap flex flex-wrap items-center justify-between gap-3 py-6 text-[12px] text-white/40">
-      <p>© {year} DZ Developers. All rights reserved.</p>
-      <a
-        href="mailto:info@dzdevelopers.com"
-        class="text-white/40 no-underline transition-colors hover:text-white"
-      >
-        info@dzdevelopers.com
-      </a>
+  <div class="relative border-t border-white/[0.07]">
+    <div
+      class="wrap flex flex-wrap items-center justify-between gap-3 py-6 font-mono text-[11px] uppercase tracking-[0.14em] text-white/30"
+    >
+      <p>© {year} DZ Developers</p>
+      <p>Designed &amp; built in-house</p>
     </div>
   </div>
 </footer>

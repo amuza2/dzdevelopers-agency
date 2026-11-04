@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-labelledby="w2t w2d">
+  <title id="w2t">Mobile application screens</title>
+  <desc id="w2d">Two phone frames showing a dark app interface with cards, a chart and a bottom navigation bar.</desc>
+  <defs>
+    <linearGradient id="w2bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0f18"/><stop offset=".5" stop-color="#0a1714"/><stop offset="1" stop-color="#071a1d"/>
+    </linearGradient>
+    <radialGradient id="w2glowA" cx=".3" cy=".2" r=".6">
+      <stop offset="0" stop-color="#38cf98" stop-opacity=".35"/><stop offset="1" stop-color="#38cf98" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="w2glowB" cx=".85" cy=".85" r=".6">
+      <stop offset="0" stop-color="#3b82f6" stop-opacity=".28"/><stop offset="1" stop-color="#3b82f6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="w2screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#101c1a"/><stop offset="1" stop-color="#0a1114"/>
+    </linearGradient>
+    <linearGradient id="w2card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#16b97f"/><stop offset="1" stop-color="#0c9a68"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#w2bg)"/>
+  <rect width="1200" height="800" fill="url(#w2glowA)"/>
+  <rect width="1200" height="800" fill="url(#w2glowB)"/>
+
+  <g opacity=".75">
+    <rect x="676" y="176" width="252" height="512" rx="42" fill="#0b1015" stroke="#ffffff" stroke-opacity=".1"/>
+    <rect x="690" y="190" width="224" height="484" rx="32" fill="url(#w2screen)"/>
+    <rect x="766" y="204" width="72" height="12" rx="6" fill="#ffffff" fill-opacity=".12"/>
+    <rect x="706" y="240" width="120" height="14" rx="7" fill="#ffffff" fill-opacity=".22"/>
+    <rect x="706" y="268" width="80" height="10" rx="5" fill="#ffffff" fill-opacity=".1"/>
+    <rect x="706" y="300" width="192" height="86" rx="16" fill="#ffffff" fill-opacity=".05"/>
+    <rect x="706" y="400" width="192" height="12" rx="6" fill="#ffffff" fill-opacity=".1"/>
+    <rect x="706" y="426" width="150" height="12" rx="6" fill="#ffffff" fill-opacity=".08"/>
+    <rect x="706" y="452" width="176" height="12" rx="6" fill="#ffffff" fill-opacity=".08"/>
+    <rect x="706" y="490" width="90" height="70" rx="12" fill="#ffffff" fill-opacity=".05"/>
+    <rect x="808" y="490" width="90" height="70" rx="12" fill="#ffffff" fill-opacity=".05"/>
+    <rect x="706" y="620" width="192" height="40" rx="14" fill="#ffffff" fill-opacity=".06"/>
+  </g>
+
+  <rect x="312" y="88" width="312" height="624" rx="52" fill="#0b1015" stroke="#ffffff" stroke-opacity=".16"/>
+  <rect x="328" y="104" width="280" height="592" rx="40" fill="url(#w2screen)"/>
+  <rect x="418" y="120" width="100" height="14" rx="7" fill="#ffffff" fill-opacity=".14"/>
+
+  <rect x="352" y="160" width="120" height="16" rx="8" fill="#ffffff" fill-opacity=".26"/>
+  <rect x="352" y="188" width="72" height="10" rx="5" fill="#ffffff" fill-opacity=".12"/>
+  <circle cx="576" cy="174" r="16" fill="#ffffff" fill-opacity=".08"/>
+
+  <rect x="352" y="220" width="232" height="120" rx="20" fill="url(#w2card)"/>
+  <rect x="374" y="244" width="80" height="10" rx="5" fill="#ffffff" fill-opacity=".55"/>
+  <rect x="374" y="266" width="128" height="22" rx="8" fill="#ffffff" fill-opacity=".85"/>
+  <rect x="374" y="306" width="188" height="10" rx="5" fill="#ffffff" fill-opacity=".4"/>
+
+  <rect x="352" y="360" width="232" height="10" rx="5" fill="#ffffff" fill-opacity=".12"/>
+  <g fill="#ffffff" fill-opacity=".07">
+    <rect x="352" y="388" width="232" height="64" rx="14"/>
+    <rect x="352" y="464" width="232" height="64" rx="14"/>
+  </g>
+  <g fill="#6ee0b4" fill-opacity=".8">
+    <rect x="370" y="406" width="28" height="28" rx="9"/>
+    <rect x="370" y="482" width="28" height="28" rx="9"/>
+  </g>
+  <g fill="#ffffff" fill-opacity=".2">
+    <rect x="414" y="410" width="110" height="9" rx="4.5"/>
+    <rect x="414" y="428" width="70" height="9" rx="4.5"/>
+    <rect x="414" y="486" width="96" height="9" rx="4.5"/>
+    <rect x="414" y="504" width="58" height="9" rx="4.5"/>
+  </g>
+
+  <rect x="352" y="600" width="232" height="56" rx="20" fill="#ffffff" fill-opacity=".06"/>
+  <circle cx="392" cy="628" r="9" fill="#6ee0b4"/>
+  <circle cx="452" cy="628" r="9" fill="#ffffff" fill-opacity=".2"/>
+  <circle cx="512" cy="628" r="9" fill="#ffffff" fill-opacity=".2"/>
+  <circle cx="572" cy="628" r="9" fill="#ffffff" fill-opacity=".2"/>
+</svg>

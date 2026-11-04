@@ -1,144 +1,213 @@
 ---
 import Base from '../layouts/Base.astro'
 import PageHeader from '../components/PageHeader.astro'
+import Icon from '../components/Icon.astro'
 
 const details = [
-  { label: 'Email', value: 'info@dzdevelopers.com', href: 'mailto:info@dzdevelopers.com' },
-  { label: 'GitHub', value: 'github.com/amuza2', href: 'https://github.com/amuza2' },
+  {
+    label: 'Email',
+    value: 'info@dzdevelopers.com',
+    href: 'mailto:info@dzdevelopers.com',
+    icon: 'mail' as const,
+  },
+  {
+    label: 'GitHub',
+    value: 'github.com/amuza2',
+    href: 'https://github.com/amuza2',
+    icon: 'github' as const,
+  },
   {
     label: 'LinkedIn',
     value: 'in/mohammed-chami-dev',
     href: 'https://www.linkedin.com/in/mohammed-chami-dev/',
+    icon: 'linkedin' as const,
   },
 ]
+
+const field =
+  'mt-2 w-full rounded-xl border border-ink-200 bg-white px-4 py-3 text-[15px] text-ink-900 outline-none transition-all duration-200 placeholder:text-ink-300 focus:border-brand-500 focus:ring-4 focus:ring-brand-100'
 ---
 
 <Base
   title="Contact — DZ Developers"
-  description="Get in touch about a web application, API or deployment project."
+  description="Get in touch about a web application, mobile app, API or deployment project."
 >
   <PageHeader
     eyebrow="Contact"
     title="Tell us what you are trying to build"
-    lead="A few sentences about the problem is enough to start. You will get a reply with an honest opinion on whether we can help."
+    lead="A few sentences about the problem is enough to start. You will get an honest opinion on whether we can help — and a reply within one working day."
   />
 
-  <section class="wrap grid gap-12 py-16 sm:py-20 lg:grid-cols-5">
-    <div class="lg:col-span-3">
-      <form id="contact-form" class="space-y-6" novalidate>
-        <div class="grid gap-6 sm:grid-cols-2">
-          <div>
-            <label for="name" class="block text-[13px] uppercase tracking-[0.09em] text-ink-500">
-              Your name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              required
-              autocomplete="name"
-              class="mt-2 w-full border border-ink-100 bg-white px-3 py-2.5 text-[14px] outline-none transition-colors focus:border-brand-600"
-            />
-          </div>
-          <div>
-            <label for="email" class="block text-[13px] uppercase tracking-[0.09em] text-ink-500">
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              autocomplete="email"
-              class="mt-2 w-full border border-ink-100 bg-white px-3 py-2.5 text-[14px] outline-none transition-colors focus:border-brand-600"
-            />
-          </div>
+  <section class="section">
+    <div class="wrap grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+      <div data-reveal>
+        <div class="rounded-[28px] border border-ink-100 bg-ink-50/70 p-6 sm:p-10">
+          <h2 class="t-h3 text-[20px]">Start the conversation</h2>
+          <p class="mt-2 text-[14px] text-ink-500">
+            No form service, no tracking — this composes an email from your own
+            mail client.
+          </p>
+
+          <form id="contact-form" class="mt-8 space-y-5" novalidate>
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="name" class="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-500">
+                  Your name
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  autocomplete="name"
+                  placeholder="Jane Doe"
+                  class={field}
+                />
+              </div>
+              <div>
+                <label for="email" class="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-500">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  autocomplete="email"
+                  placeholder="jane@company.com"
+                  class={field}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="kind" class="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-500">
+                What do you need?
+              </label>
+              <select id="kind" name="kind" class={field}>
+                <option>Web application</option>
+                <option>Mobile application</option>
+                <option>API or integration</option>
+                <option>Deployment or infrastructure</option>
+                <option>Maintenance of an existing product</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message" class="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-500">
+                About the project
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                required
+                placeholder="What should it do, what exists already, and when do you need it?"
+                class={field}
+              ></textarea>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-4">
+              <button type="submit" class="btn btn-dark">
+                Send message
+                <Icon name="arrow-right" size={15} />
+              </button>
+              <p id="form-status" class="text-[13px] text-ink-500" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+
+          <noscript>
+            <p class="mt-5 rounded-xl border border-ink-200 bg-white p-4 text-[13px] text-ink-700">
+              JavaScript is off, so the form cannot compose an email. Write to
+              <a class="text-brand-600 underline" href="mailto:info@dzdevelopers.com">info@dzdevelopers.com</a>
+              directly.
+            </p>
+          </noscript>
         </div>
-
-        <div>
-          <label for="message" class="block text-[13px] uppercase tracking-[0.09em] text-ink-500">
-            What do you need?
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows="6"
-            required
-            class="mt-2 w-full border border-ink-100 bg-white px-3 py-2.5 text-[14px] outline-none transition-colors focus:border-brand-600"
-          ></textarea>
-        </div>
-
-        <button type="submit" class="btn-solid">Send message</button>
-
-        <p class="text-[12px] leading-[21px] text-ink-500">
-          This opens your email client with the message filled in — no form
-          service, nothing stored in between.
-        </p>
-      </form>
-
-      <noscript>
-        <p class="mt-4 border border-ink-100 bg-ink-50 p-4 text-[13px] text-ink-700">
-          JavaScript is off, so the form cannot compose an email. Write to
-          <a class="text-brand-600 underline" href="mailto:info@dzdevelopers.com">info@dzdevelopers.com</a>
-          directly.
-        </p>
-      </noscript>
-    </div>
-
-    <aside class="lg:col-span-2">
-      <h2 class="text-[13px] uppercase tracking-[0.09em] text-ink-300">
-        Or reach out directly
-      </h2>
-      <ul class="mt-6 space-y-5">
-        {
-          details.map((detail) => (
-            <li>
-              <p class="text-[11px] uppercase tracking-[0.12em] text-ink-300">
-                {detail.label}
-              </p>
-              <a
-                href={detail.href}
-                rel="noopener noreferrer"
-                class="mt-1 inline-block border-b border-brand-200 pb-0.5 text-[16px] font-light text-brand-600 no-underline transition-colors hover:border-brand-600 hover:text-brand-700"
-              >
-                {detail.value}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-
-      <div class="mt-10 border-t border-ink-100 pt-6">
-        <h3 class="text-[13px] uppercase tracking-[0.09em] text-ink-300">Helpful to include</h3>
-        <ul class="mt-4 space-y-1 text-[13px] leading-[23px] text-ink-500">
-          <li>— What the product should do</li>
-          <li>— Whether anything already exists</li>
-          <li>— Your rough timeline</li>
-        </ul>
       </div>
-    </aside>
+
+      <aside class="lg:pt-2" data-reveal style="--reveal-delay:120ms">
+        <h2 class="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-400">
+          Or reach out directly
+        </h2>
+
+        <ul class="mt-6 space-y-3">
+          {
+            details.map((detail) => (
+              <li>
+                <a
+                  href={detail.href}
+                  rel="noopener noreferrer"
+                  class="group flex items-center gap-4 rounded-2xl border border-ink-100 bg-white p-4 no-underline transition-all duration-300 hover:-translate-y-0.5 hover:border-ink-200 hover:shadow-[0_20px_50px_-30px_rgba(6,9,12,0.45)]"
+                >
+                  <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-ink-50 text-ink-600 transition-colors duration-300 group-hover:bg-brand-50 group-hover:text-brand-600">
+                    <Icon name={detail.icon} size={17} />
+                  </span>
+                  <span class="min-w-0">
+                    <span class="block font-mono text-[10px] uppercase tracking-[0.18em] text-ink-400">
+                      {detail.label}
+                    </span>
+                    <span class="mt-0.5 block truncate font-display text-[14px] font-medium text-ink-950">
+                      {detail.value}
+                    </span>
+                  </span>
+                  <Icon name="arrow-up-right" size={15} class="ml-auto shrink-0 text-ink-300 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-ink-950" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="mt-8 rounded-2xl border border-ink-100 bg-ink-50 p-6">
+          <h3 class="font-display text-[14px] font-medium text-ink-950">Helpful to include</h3>
+          <ul class="mt-4 space-y-2.5 text-[13.5px] leading-[1.6] text-ink-500">
+            <li class="flex gap-2.5"><Icon name="check" size={15} class="mt-0.5 shrink-0 text-brand-600" /> What the product should do</li>
+            <li class="flex gap-2.5"><Icon name="check" size={15} class="mt-0.5 shrink-0 text-brand-600" /> Whether anything already exists</li>
+            <li class="flex gap-2.5"><Icon name="check" size={15} class="mt-0.5 shrink-0 text-brand-600" /> Your rough timeline and budget</li>
+          </ul>
+        </div>
+
+        <p class="mt-6 flex items-center gap-2 text-[13px] text-ink-400">
+          <Icon name="pin" size={15} />
+          Algeria — working remotely, CET
+        </p>
+      </aside>
+    </div>
   </section>
 </Base>
 
 <script>
   // No backend: compose a mailto so the form is genuinely functional.
-  const form = document.getElementById('contact-form')
+  function bindContactForm() {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null
+    const status = document.getElementById('form-status')
+    if (!form || form.dataset.bound === 'true') return
 
-  form?.addEventListener('submit', (event) => {
-    event.preventDefault()
+    form.dataset.bound = 'true'
 
-    const data = new FormData(form)
-    const name = String(data.get('name') ?? '').trim()
-    const email = String(data.get('email') ?? '').trim()
-    const message = String(data.get('message') ?? '').trim()
+    form.addEventListener('submit', (event) => {
+      event.preventDefault()
 
-    if (!name || !email || !message) {
-      form.reportValidity()
-      return
-    }
+      const data = new FormData(form)
+      const name = String(data.get('name') ?? '').trim()
+      const email = String(data.get('email') ?? '').trim()
+      const kind = String(data.get('kind') ?? '').trim()
+      const message = String(data.get('message') ?? '').trim()
 
-    const subject = encodeURIComponent(`Project enquiry from ${name}`)
-    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`)
-    window.location.href = `mailto:info@dzdevelopers.com?subject=${subject}&body=${body}`
-  })
+      if (!name || !email || !message) {
+        form.reportValidity()
+        return
+      }
+
+      const subject = encodeURIComponent(`${kind} — enquiry from ${name}`)
+      const body = encodeURIComponent(`${message}\n\nProject type: ${kind}\n\n— ${name} (${email})`)
+
+      if (status) status.textContent = 'Opening your mail client…'
+      window.location.href = `mailto:info@dzdevelopers.com?subject=${subject}&body=${body}`
+    })
+  }
+
+  document.addEventListener('astro:page-load', bindContactForm)
+  document.addEventListener('astro:after-swap', bindContactForm)
 </script>

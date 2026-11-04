@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-labelledby="w1t w1d">
+  <title id="w1t">Analytics dashboard from a web platform</title>
+  <desc id="w1d">A dark dashboard interface with summary cards, a bar chart and a rising trend line.</desc>
+  <defs>
+    <linearGradient id="w1bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#081018"/><stop offset=".55" stop-color="#0a1a16"/><stop offset="1" stop-color="#06120f"/>
+    </linearGradient>
+    <radialGradient id="w1glow" cx=".78" cy=".08" r=".8">
+      <stop offset="0" stop-color="#16b97f" stop-opacity=".42"/><stop offset="1" stop-color="#16b97f" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="w1bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#0c9a68" stop-opacity=".3"/><stop offset="1" stop-color="#6ee0b4"/>
+    </linearGradient>
+    <linearGradient id="w1line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38cf98"/><stop offset="1" stop-color="#c8f7e3"/>
+    </linearGradient>
+    <pattern id="w1grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0v60" fill="none" stroke="#ffffff" stroke-opacity=".045"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#w1bg)"/>
+  <rect width="1200" height="800" fill="url(#w1grid)"/>
+  <rect width="1200" height="800" fill="url(#w1glow)"/>
+
+  <rect x="120" y="104" width="960" height="592" rx="30" fill="#ffffff" fill-opacity=".055" stroke="#ffffff" stroke-opacity=".13"/>
+  <circle cx="164" cy="146" r="6" fill="#ffffff" fill-opacity=".22"/>
+  <circle cx="188" cy="146" r="6" fill="#ffffff" fill-opacity=".16"/>
+  <circle cx="212" cy="146" r="6" fill="#ffffff" fill-opacity=".12"/>
+  <rect x="880" y="136" width="160" height="20" rx="10" fill="#ffffff" fill-opacity=".07"/>
+
+  <rect x="152" y="186" width="196" height="480" rx="18" fill="#ffffff" fill-opacity=".04"/>
+  <rect x="172" y="212" width="156" height="34" rx="10" fill="#16b97f" fill-opacity=".3"/>
+  <rect x="172" y="262" width="120" height="13" rx="6.5" fill="#ffffff" fill-opacity=".14"/>
+  <rect x="172" y="296" width="140" height="13" rx="6.5" fill="#ffffff" fill-opacity=".1"/>
+  <rect x="172" y="330" width="104" height="13" rx="6.5" fill="#ffffff" fill-opacity=".1"/>
+  <rect x="172" y="364" width="132" height="13" rx="6.5" fill="#ffffff" fill-opacity=".1"/>
+  <rect x="172" y="600" width="156" height="44" rx="12" fill="#ffffff" fill-opacity=".06" stroke="#ffffff" stroke-opacity=".08"/>
+
+  <g fill="#ffffff" fill-opacity=".06" stroke="#ffffff" stroke-opacity=".08">
+    <rect x="376" y="186" width="212" height="96" rx="16"/>
+    <rect x="608" y="186" width="212" height="96" rx="16"/>
+    <rect x="840" y="186" width="212" height="96" rx="16"/>
+  </g>
+  <g fill="#ffffff" fill-opacity=".26">
+    <rect x="396" y="212" width="64" height="10" rx="5"/>
+    <rect x="628" y="212" width="52" height="10" rx="5"/>
+    <rect x="860" y="212" width="70" height="10" rx="5"/>
+  </g>
+  <g fill="#e9edf1" fill-opacity=".8">
+    <rect x="396" y="238" width="104" height="22" rx="7"/>
+    <rect x="628" y="238" width="86" height="22" rx="7"/>
+    <rect x="860" y="238" width="118" height="22" rx="7"/>
+  </g>
+
+  <rect x="376" y="304" width="676" height="362" rx="18" fill="#ffffff" fill-opacity=".035" stroke="#ffffff" stroke-opacity=".07"/>
+  <g fill="url(#w1bar)">
+    <rect x="412" y="526" width="34" height="100" rx="9"/>
+    <rect x="466" y="476" width="34" height="150" rx="9"/>
+    <rect x="520" y="506" width="34" height="120" rx="9"/>
+    <rect x="574" y="436" width="34" height="190" rx="9"/>
+    <rect x="628" y="466" width="34" height="160" rx="9"/>
+    <rect x="682" y="406" width="34" height="220" rx="9"/>
+    <rect x="736" y="446" width="34" height="180" rx="9"/>
+    <rect x="790" y="366" width="34" height="260" rx="9"/>
+    <rect x="844" y="416" width="34" height="210" rx="9"/>
+    <rect x="898" y="386" width="34" height="240" rx="9"/>
+    <rect x="952" y="346" width="34" height="280" rx="9"/>
+    <rect x="1006" y="376" width="34" height="250" rx="9"/>
+  </g>
+  <path d="M412 500C466 470 500 520 528 500S590 430 618 452s70-64 100-46 66-38 96-52 62 10 92-22 78-16 104-30"
+        fill="none" stroke="url(#w1line)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="1036" cy="364" r="7" fill="#c8f7e3"/>
+  <circle cx="1036" cy="364" r="14" fill="#38cf98" fill-opacity=".25"/>
+</svg>

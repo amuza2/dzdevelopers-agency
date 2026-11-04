@@ -1,154 +1,328 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   Design tokens lifted from the original BeAgency stylesheet (agency.css).
+   Design tokens.
 
-   The accent is #239963 (with #177d4e on hover), bands alternate between
-   #2c2c2c charcoal and white, body copy is #444444, and everything is set in
-   Lato: 300 for headings, 400 for body. The `brand-*` / `ink-*` names are kept
-   as the shared vocabulary so every page re-skins from this one block.
+   The studio's look: near-black ink, a single emerald accent, and generous
+   off-white space. Sora carries the display type (geometric, modern), Inter
+   the body copy, and JetBrains Mono the small uppercase labels — the mono
+   labels are what stop the page reading like a generic template.
    --------------------------------------------------------------------------- */
 @theme {
-  --font-sans: Lato, Arial, Tahoma, sans-serif;
-  --font-alt: Roboto, Arial, Tahoma, sans-serif;
-  --font-serif: Georgia, serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Sora', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --color-brand-50: #f1f8f5;
-  --color-brand-100: #dcefe6;
-  --color-brand-200: #b9dfcd;
-  --color-brand-500: #239963;
-  --color-brand-600: #239963;
-  --color-brand-700: #177d4e;
+  --color-ink-950: #06090c;
+  --color-ink-900: #0a1015;
+  --color-ink-800: #111a21;
+  --color-ink-700: #1a242e;
+  --color-ink-600: #3a4753;
+  --color-ink-500: #5c6875;
+  --color-ink-400: #7f8b98;
+  --color-ink-300: #a9b4bf;
+  --color-ink-200: #d6dde4;
+  --color-ink-100: #e8edf1;
+  --color-ink-50: #f5f8fa;
 
-  --color-ink-900: #2c2c2c;
-  --color-ink-700: #444444;
-  --color-ink-500: #747474;
-  --color-ink-300: #a8a8a8;
-  --color-ink-100: #e8e8e8;
-  --color-ink-50: #f7f7f7;
+  --color-brand-50: #eefbf5;
+  --color-brand-100: #d5f6e7;
+  --color-brand-200: #a9eed2;
+  --color-brand-300: #6ee0b4;
+  --color-brand-400: #38cf98;
+  --color-brand-500: #16b97f;
+  --color-brand-600: #0c9a68;
+  --color-brand-700: #0a7b54;
+  --color-brand-900: #07412f;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    background-color: #fff;
   }
 
   body {
-    @apply bg-white font-sans text-[14px] leading-[23px] text-ink-700 antialiased;
+    @apply bg-white font-sans text-[16px] leading-[1.7] text-ink-500 antialiased;
   }
 
-  /* Lato 300 is the template's signature — never bold these. */
   h1,
   h2,
   h3,
   h4 {
-    @apply font-light text-ink-900;
+    @apply font-display font-semibold tracking-[-0.025em] text-ink-950 text-balance;
   }
 
-  a {
-    @apply text-brand-600;
+  ::selection {
+    background-color: var(--color-brand-200);
+    color: var(--color-ink-950);
   }
 
-  /* The original template stripped focus rings; keep them — invisible focus is
-     an accessibility failure even when it looks tidier. */
+  /* Never remove focus rings — keyboard users need them. */
   :focus-visible {
-    outline: 2px solid var(--color-brand-600);
-    outline-offset: 2px;
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
-    }
+  img,
+  svg {
+    @apply max-w-full;
   }
 }
 
 @layer components {
-  /* ---- layout ---------------------------------------------------------- */
+  /* ---- layout --------------------------------------------------------- */
   .wrap {
-    @apply mx-auto w-full max-w-[1240px] px-6;
+    @apply mx-auto w-full max-w-[1200px] px-6 lg:px-8;
   }
 
-  .band-dark {
-    @apply bg-ink-900 text-white;
+  .section {
+    @apply py-20 lg:py-28;
   }
 
-  .band-green {
-    @apply bg-brand-600 text-white;
+  /* Soft rules between light sections instead of hard band changes. */
+  .hairline {
+    @apply border-t border-ink-100;
   }
 
-  .band-light {
-    @apply bg-ink-50;
+  /* ---- type ----------------------------------------------------------- */
+  .eyebrow {
+    @apply inline-flex items-center gap-2.5 font-mono text-[11px] font-medium uppercase tracking-[0.22em];
   }
 
-  /* The green bands carry a faint diagonal lattice, as in the template. */
-  .pattern-geo {
-    background-image:
-      repeating-linear-gradient(
-        45deg,
-        rgb(255 255 255 / 0.055) 0 1px,
-        transparent 1px 24px
-      ),
-      repeating-linear-gradient(
-        -45deg,
-        rgb(255 255 255 / 0.055) 0 1px,
-        transparent 1px 24px
-      );
+  .eyebrow::before {
+    content: '';
+    @apply inline-block h-px w-7 bg-current opacity-50;
   }
 
-  /* ---- type ------------------------------------------------------------ */
-  .h-hero {
-    @apply font-light leading-[1.14] text-white;
+  .t-hero {
+    font-size: clamp(2.15rem, 3.5vw, 3.3rem);
+    line-height: 1.06;
+    letter-spacing: -0.034em;
   }
 
-  .h-section {
-    @apply font-light leading-[1.15] text-ink-900;
+  .t-h2 {
+    font-size: clamp(1.7rem, 2.9vw, 2.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
   }
 
-  .h-card {
-    @apply font-light leading-[25px];
+  .t-h3 {
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+    line-height: 1.3;
+    letter-spacing: -0.018em;
   }
 
-  /* In the template every card title is a link ruled off with 1px — it is the
-     detail that makes these sections read as BeTheme and not as a generic
-     card grid. */
-  .u-title {
-    @apply inline-block border-b border-current pb-0.5 text-brand-600 no-underline transition-colors hover:text-brand-700;
+  .t-lead {
+    font-size: clamp(1rem, 1.15vw, 1.125rem);
+    line-height: 1.68;
   }
 
-  .band-green .u-title,
-  .band-dark .u-title {
-    @apply text-white hover:text-white/80;
+  .text-gradient {
+    background-image: linear-gradient(100deg, #c8f7e3 0%, #6ee0b4 38%, #16b97f 78%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
-  /* ---- buttons --------------------------------------------------------- */
+  /* ---- buttons -------------------------------------------------------- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-sans text-[14px] font-medium no-underline transition-all duration-300;
+    transition-timing-function: var(--ease-out-expo);
+  }
+
+  .btn-primary {
+    @apply bg-brand-500 text-ink-950 hover:-translate-y-0.5 hover:bg-brand-400;
+    box-shadow: 0 12px 34px -14px rgb(22 185 127 / 0.95);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 18px 44px -16px rgb(22 185 127 / 1);
+  }
+
+  .btn-dark {
+    @apply bg-ink-950 text-white hover:-translate-y-0.5 hover:bg-ink-800;
+    box-shadow: 0 12px 30px -16px rgb(6 9 12 / 0.8);
+  }
+
+  .btn-ghost {
+    @apply border border-white/20 bg-white/[0.04] text-white hover:-translate-y-0.5 hover:border-white/45 hover:bg-white/[0.08];
+  }
+
   .btn-outline {
-    @apply inline-block border border-white px-8 py-3 text-[14px] text-white no-underline transition-colors hover:bg-white hover:text-ink-900;
+    @apply border border-ink-200 text-ink-950 hover:-translate-y-0.5 hover:border-ink-950 hover:bg-ink-950 hover:text-white;
   }
 
-  .btn-solid {
-    @apply inline-block bg-brand-600 px-8 py-3 text-[14px] text-white no-underline transition-colors hover:bg-brand-700;
+  .link-arrow {
+    @apply inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.16em] no-underline transition-colors duration-200;
   }
 
-  /* Same shape as .btn-outline, for use on white rather than charcoal. */
-  .btn-outline-dark {
-    @apply inline-block border border-ink-900 px-8 py-3 text-[14px] text-ink-900 no-underline transition-colors hover:bg-ink-900 hover:text-white;
+  /* ---- surfaces ------------------------------------------------------- */
+  .card {
+    @apply rounded-[26px] border border-ink-100 bg-white p-7 transition-all duration-500;
+    transition-timing-function: var(--ease-out-expo);
   }
 
-  /* ---- misc ------------------------------------------------------------ */
-  .rule {
-    @apply border-0 border-t border-ink-100;
+  .card-lift:hover {
+    @apply -translate-y-1 border-ink-200;
+    box-shadow: 0 30px 70px -38px rgb(6 9 12 / 0.5);
   }
 
-  .band-green .rule,
-  .band-dark .rule {
-    @apply border-white/25;
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-ink-100 bg-white px-3 py-1 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-500;
+  }
+
+  /* ---- backgrounds ---------------------------------------------------- */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.055) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  .bg-grid-light {
+    background-image:
+      linear-gradient(to right, rgb(6 9 12 / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(6 9 12 / 0.045) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  .bg-noise {
+    background-image: radial-gradient(circle at 1px 1px, rgb(6 9 12 / 0.05) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+
+  /* ---- hero visual ---------------------------------------------------- */
+  .app-window {
+    @apply relative rounded-[24px] border border-white/12 bg-white/[0.055] p-3;
+    box-shadow: 0 50px 120px -50px rgb(0 0 0 / 0.95), inset 0 1px 0 rgb(255 255 255 / 0.08);
+    backdrop-filter: blur(14px);
+  }
+
+  .app-dot {
+    @apply h-2 w-2 rounded-full bg-white/25;
+  }
+
+  .app-bar {
+    @apply rounded-[9px] bg-gradient-to-t from-brand-600/25 to-brand-300;
+  }
+
+  .phone-card {
+    @apply absolute -bottom-10 -left-4 w-[150px] rounded-[26px] border border-white/15 bg-ink-900/95 p-2.5 sm:-left-10 sm:w-[172px];
+    box-shadow: 0 40px 90px -40px rgb(0 0 0 / 1);
+    animation: float-slow 9s ease-in-out infinite;
+  }
+
+  .float-chip {
+    @apply absolute rounded-full border border-white/15 bg-ink-900/90 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/70;
+    backdrop-filter: blur(10px);
+    animation: float-slow 11s ease-in-out infinite reverse;
+  }
+
+  /* ---- marquee -------------------------------------------------------- */
+  .marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 34s linear infinite;
+  }
+
+  .marquee-mask {
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+}
+
+@layer utilities {
+  /* ---- scroll reveal --------------------------------------------------
+     Only armed when <html> has .js (set by an inline script in the head), so
+     the content stays visible without JavaScript. */
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.75s var(--ease-out-expo) var(--reveal-delay, 0ms),
+      transform 0.75s var(--ease-out-expo) var(--reveal-delay, 0ms);
+  }
+
+  html.js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Page-to-page transitions (Astro ClientRouter / View Transitions).
+   The old page lifts and fades; the new one settles in from slightly below.
+   --------------------------------------------------------------------------- */
+@keyframes page-out {
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+::view-transition-old(root) {
+  animation: page-out 0.28s cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+::view-transition-new(root) {
+  animation: page-in 0.5s var(--ease-out-expo) both;
+}
+
+/* Header and footer stay put while the page body moves. */
+::view-transition-old(site-header),
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Reduced motion: kill transforms and staggered delays, keep everything visible.
+   --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .marquee {
+    animation: none;
   }
 }

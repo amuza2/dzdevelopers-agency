@@ -1,36 +1,57 @@
 ---
 import Base from '../layouts/Base.astro'
+import Icon from '../components/Icon.astro'
+import CtaBand from '../components/CtaBand.astro'
 
-/*
-  NOTE: the copy and the three "work" cards are placeholders carried over from
-  the original template so the layout can be judged. Replace the text and swap
-  the project names for real case studies before going live.
-*/
+const stack = [
+  'Django',
+  'Vue',
+  'Flutter',
+  'PostgreSQL',
+  'Docker',
+  'Tailwind',
+  'Astro',
+  'Redis',
+  'Nginx',
+  'GitHub Actions',
+]
 
-const capabilities = [
+const services = [
   {
+    icon: 'code' as const,
     title: 'Web applications',
-    body: 'Django and Vue products built to handle real data, real users and real growth — not demos.',
+    body: 'Server-rendered products with real accounts, permissions and reporting — not prototypes that fall over at the first hundred users.',
+    points: ['Django & Vue', 'Role-based access', 'Admin tooling'],
   },
   {
+    icon: 'smartphone' as const,
+    title: 'Mobile apps',
+    body: 'Cross-platform iOS and Android apps built in Flutter, sharing one codebase and one API with your web product.',
+    points: ['Flutter', 'Offline-first', 'App store releases'],
+  },
+  {
+    icon: 'layers' as const,
     title: 'APIs & integrations',
-    body: 'REST APIs, authentication and third-party integrations that other teams can build on.',
+    body: 'Documented REST APIs and the third-party integrations around them — payments, email, storage, whatever the product depends on.',
+    points: ['Versioned APIs', 'Token auth', 'Webhooks'],
   },
   {
+    icon: 'cloud' as const,
     title: 'Cloud & deployment',
-    body: 'Containerised deployments, managed databases, TLS and backups — configured and documented.',
+    body: 'Containerised deployments with TLS, managed databases and tested backups, plus a runbook so you are never locked to us.',
+    points: ['Docker', 'TLS & DNS', 'Backups'],
   },
   {
-    title: 'Data & migrations',
-    body: 'We move existing data across without losing a row, and leave a documented way back.',
-  },
-  {
+    icon: 'gauge' as const,
     title: 'Performance & SEO',
-    body: 'Fast pages, clean markup and structured data, so the product can actually be found.',
+    body: 'Fast first paint, clean semantic markup, structured data and sitemaps — the quiet work that decides whether people find you.',
+    points: ['Core Web Vitals', 'Structured data', 'Canonicals'],
   },
   {
-    title: 'Long-term maintenance',
-    body: 'Monitoring, upgrades and small features after launch, so the product keeps working.',
+    icon: 'wrench' as const,
+    title: 'Maintenance',
+    body: 'Ongoing upgrades, monitoring and small features after launch, on a monthly basis you can cancel whenever you like.',
+    points: ['Dependency upgrades', 'Uptime checks', 'Bug fixes'],
   },
 ]
 
@@ -38,195 +59,413 @@ const work = [
   {
     name: 'Colett Precision',
     tag: 'Web platform',
-    image: '/images/colett.jpg',
-    alt: 'Interface of a precision-engineering web platform',
-    body: 'A catalogue and quotation platform for a precision-engineering workshop: server-rendered, searchable, and built so non-technical staff can update it themselves.',
+    year: '2025',
+    image: '/images/work-web-platform.svg',
+    alt: 'Dashboard interface showing analytics cards and a bar chart',
+    body: 'A catalogue and quotation platform for a precision-engineering workshop — searchable, server-rendered, and editable by non-technical staff.',
   },
   {
-    name: 'Infinity Project',
-    tag: 'Product design',
-    image: '/images/unity.jpg',
-    alt: 'Product design case study',
-    body: 'A design system and marketing site for a product studio — one component library feeding both the public site and the internal application.',
+    name: 'Infinity',
+    tag: 'Mobile app',
+    year: '2024',
+    image: '/images/work-mobile-app.svg',
+    alt: 'Two phone screens showing a mobile application interface',
+    body: 'A cross-platform product app in Flutter: one codebase for iOS and Android, driven by the same API as the customer web portal.',
   },
   {
     name: 'Unity Workspace',
     tag: 'Internal tooling',
-    image: '/images/home_agency_section_2.jpg',
-    alt: 'Photograph supporting the Unity Workspace case study',
-    body: 'An internal workspace that replaced a spreadsheet: roles, audit history and exports, running against the same database as the public site.',
+    year: '2024',
+    image: '/images/work-internal-tool.svg',
+    alt: 'Admin interface with a data table, status labels and a task board',
+    body: 'An internal workspace that replaced a spreadsheet: roles, audit history, imports and exports running against the production database.',
   },
 ]
 
 const process = [
-  { step: '01', title: 'Scope', body: 'We agree on what the product has to do — and what it explicitly will not.' },
-  { step: '02', title: 'Build', body: 'Short iterations, with something clickable at the end of each one.' },
-  { step: '03', title: 'Ship', body: 'Deployed to your infrastructure, with TLS, backups and a runbook.' },
-  { step: '04', title: 'Maintain', body: 'Monitoring and iteration after launch, on a schedule that suits you.' },
+  {
+    step: '01',
+    title: 'Scope',
+    body: 'We agree on what the product has to do — and what it explicitly will not.',
+  },
+  {
+    step: '02',
+    title: 'Design & build',
+    body: 'Short iterations with something clickable at the end of each one.',
+  },
+  {
+    step: '03',
+    title: 'Ship',
+    body: 'Deployed to your infrastructure with TLS, backups and a written runbook.',
+  },
+  {
+    step: '04',
+    title: 'Maintain',
+    body: 'Monitoring, upgrades and small features after launch, on a schedule that suits you.',
+  },
+]
+
+const principles = [
+  { icon: 'shield' as const, title: 'Boring where it counts', body: 'Predictable infrastructure and backups that have been restored at least once.' },
+  { icon: 'server' as const, title: 'One team, start to finish', body: 'The people who scope the work are the people who build and maintain it.' },
+  { icon: 'sparkles' as const, title: 'Written down', body: 'Decisions and runbooks live in the repo, not in somebody’s head.' },
 ]
 ---
 
 <Base
-  title="DZ Developers — Web Applications, APIs & Cloud"
-  description="A software studio building web applications, APIs and cloud infrastructure. Django, Vue and PostgreSQL, delivered and maintained."
+  title="DZ Developers — Web & Mobile Product Studio"
+  description="A software studio designing and building web and mobile applications, the APIs behind them, and the infrastructure that runs them."
 >
-  <!-- Hero — charcoal band, big thin centred type, outlined button. This is the
-       template's opening move; the slider it used to sit in is gone. -->
-  <section class="band-dark">
-    <div class="wrap py-20 text-center sm:py-28">
-      <h1 class="h-hero mx-auto max-w-4xl text-[30px] sm:text-[42px] lg:text-[52px]">
-        We build software that brings usability, beauty and great impact.
-      </h1>
-      <a href="/contact" class="btn-outline mt-10">Hire us now</a>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-ink-950 text-white">
+    <div class="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden="true"></div>
+    <div
+      class="pointer-events-none absolute -right-40 -top-40 h-[620px] w-[620px] rounded-full bg-brand-500/20 blur-[150px]"
+      aria-hidden="true"
+    >
     </div>
-  </section>
+    <div
+      class="pointer-events-none absolute -bottom-72 -left-32 h-[520px] w-[520px] rounded-full bg-brand-700/30 blur-[150px]"
+      aria-hidden="true"
+    >
+    </div>
 
-  <!-- Capabilities — the green band with its lattice, 3 × 2 split by rules. -->
-  <section class="band-green pattern-geo" aria-labelledby="capabilities-heading">
-    <div class="wrap py-16 sm:py-20">
-      <h2 id="capabilities-heading" class="h-section text-[30px] text-white">
-        What we provide
-      </h2>
+    <div class="wrap relative grid items-center gap-16 pb-24 pt-20 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12 lg:pb-32 lg:pt-28">
+      <div>
+        <p class="eyebrow text-brand-300" data-reveal>Web &amp; mobile product studio</p>
 
-      <div class="mt-12">
-        <ul class="grid gap-x-12 sm:grid-cols-3">
-          {
-            capabilities.slice(0, 3).map((item) => (
-              <li class="py-8">
-                <h3 class="h-card text-[21px]">
-                  <a href="/services" class="u-title">{item.title}</a>
-                </h3>
-                <p class="mt-4 text-[13px] leading-[23px] text-white/75">{item.body}</p>
-              </li>
-            ))
-          }
-        </ul>
-        <ul class="grid gap-x-12 sm:grid-cols-3">
-          {
-            capabilities.slice(3).map((item) => (
-              <li class="border-t border-white/25 py-8">
-                <h3 class="h-card text-[21px]">
-                  <a href="/services" class="u-title">{item.title}</a>
-                </h3>
-                <p class="mt-4 text-[13px] leading-[23px] text-white/75">{item.body}</p>
-              </li>
-            ))
-          }
-        </ul>
+        <h1 class="t-hero mt-6 text-white" data-reveal style="--reveal-delay:70ms">
+          We build <span class="text-gradient">web and mobile products</span> that
+          people actually use.
+        </h1>
+
+        <p class="t-lead mt-7 max-w-xl text-white/60" data-reveal style="--reveal-delay:140ms">
+          Design, engineering and deployment under one roof. From the first
+          prototype to the release you maintain for years — built properly, and
+          handed over with the documentation to prove it.
+        </p>
+
+        <div class="mt-10 flex flex-wrap items-center gap-3" data-reveal style="--reveal-delay:210ms">
+          <a href="/contact" class="btn btn-primary">
+            Start a project
+            <Icon name="arrow-right" size={16} />
+          </a>
+          <a href="#work" class="btn btn-ghost">See our work</a>
+        </div>
+
+        <dl
+          class="mt-14 grid max-w-md grid-cols-3 gap-6 border-t border-white/10 pt-7"
+          data-reveal
+          style="--reveal-delay:280ms"
+        >
+          <div>
+            <dt class="font-mono text-[10px] uppercase tracking-[0.18em] text-white/35">Focus</dt>
+            <dd class="mt-1.5 text-[14px] text-white/80">Web &amp; mobile</dd>
+          </div>
+          <div>
+            <dt class="font-mono text-[10px] uppercase tracking-[0.18em] text-white/35">Stack</dt>
+            <dd class="mt-1.5 text-[14px] text-white/80">Django · Flutter</dd>
+          </div>
+          <div>
+            <dt class="font-mono text-[10px] uppercase tracking-[0.18em] text-white/35">Based in</dt>
+            <dd class="mt-1.5 text-[14px] text-white/80">Algeria</dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- Product mockup, drawn in markup so it stays sharp at any size. -->
+      <div class="relative mx-auto w-full max-w-[540px]" data-reveal style="--reveal-delay:180ms">
+        <div class="app-window">
+          <div class="flex items-center gap-1.5 px-2 pb-3 pt-1">
+            <span class="app-dot"></span>
+            <span class="app-dot"></span>
+            <span class="app-dot"></span>
+            <div class="ml-auto h-1.5 w-20 rounded-full bg-white/10"></div>
+          </div>
+
+          <div class="rounded-[16px] bg-ink-950/70 p-4 sm:p-5">
+            <div class="flex items-center justify-between">
+              <div class="space-y-2">
+                <div class="h-2 w-24 rounded-full bg-white/20"></div>
+                <div class="h-2 w-16 rounded-full bg-white/10"></div>
+              </div>
+              <div class="h-7 w-20 rounded-full bg-brand-400/20 ring-1 ring-brand-400/30"></div>
+            </div>
+
+            <div class="mt-5 grid grid-cols-3 gap-2.5">
+              {
+                [
+                  ['h-1 w-8', 'h-3 w-14'],
+                  ['h-1 w-10', 'h-3 w-10'],
+                  ['h-1 w-6', 'h-3 w-16'],
+                ].map(([label, value]) => (
+                  <div class="rounded-xl border border-white/[0.07] bg-white/[0.04] p-3">
+                    <div class={`${label} rounded-full bg-white/15`} />
+                    <div class={`${value} mt-2.5 rounded-full bg-white/45`} />
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="mt-3 flex h-[148px] items-end gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
+              {
+                [38, 56, 44, 72, 60, 88, 74, 96, 68, 82].map((height, index) => (
+                  <div
+                    class={`flex-1 rounded-t-[5px] ${
+                      index === 7
+                        ? 'bg-gradient-to-t from-brand-500/40 to-brand-300'
+                        : 'bg-gradient-to-t from-brand-700/25 to-brand-400/60'
+                    }`}
+                    style={`height: ${height}%`}
+                  />
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating phone -->
+        <div class="phone-card hidden sm:block">
+          <div class="mx-auto mb-2 h-1 w-9 rounded-full bg-white/20"></div>
+          <div class="rounded-[18px] bg-gradient-to-b from-ink-800 to-ink-950 p-3">
+            <div class="h-1.5 w-10 rounded-full bg-white/20"></div>
+            <div class="mt-3 rounded-xl bg-gradient-to-br from-brand-400 to-brand-600 p-3">
+              <div class="h-1.5 w-8 rounded-full bg-ink-950/40"></div>
+              <div class="mt-2 h-2.5 w-16 rounded-full bg-ink-950/70"></div>
+            </div>
+            <div class="mt-2.5 space-y-2">
+              <div class="h-7 rounded-lg bg-white/[0.06]"></div>
+              <div class="h-7 rounded-lg bg-white/[0.06]"></div>
+              <div class="h-7 rounded-lg bg-white/[0.06]"></div>
+            </div>
+            <div class="mt-3 flex justify-between px-1">
+              <span class="app-dot bg-brand-400"></span>
+              <span class="app-dot"></span>
+              <span class="app-dot"></span>
+            </div>
+          </div>
+        </div>
+
+        <span class="float-chip right-0 top-6">Deploys green</span>
+        <span class="float-chip -bottom-4 right-8 hidden sm:inline-block">Flutter · iOS · Android</span>
       </div>
     </div>
   </section>
 
-  <!-- Work — stacked image / title / copy blocks, the template's showcase
-       rhythm rather than a card grid. -->
-  <section class="wrap py-16 sm:py-20" aria-labelledby="work-heading">
-    <div class="flex flex-wrap items-end justify-between gap-6">
-      <div>
-        <h2 id="work-heading" class="h-section text-[26px] sm:text-[30px]">Selected work</h2>
-        <p class="mt-3 max-w-2xl text-[13px] leading-[23px] text-ink-500">
-          A sample of the kind of products we build.
+  <!-- Technology strip -->
+  <div class="marquee-mask overflow-hidden border-b border-ink-100 bg-white py-6">
+    <div class="marquee">
+      {
+        [0, 1].map(() => (
+          <ul class="flex shrink-0 items-center gap-12 pr-12">
+            {stack.map((item) => (
+              <li class="font-mono text-[12px] uppercase tracking-[0.18em] whitespace-nowrap text-ink-400">
+                {item}
+              </li>
+            ))}
+          </ul>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Services -->
+  <section class="section" aria-labelledby="services-heading">
+    <div class="wrap">
+      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+        <div data-reveal>
+          <p class="eyebrow text-brand-600">What we do</p>
+          <h2 id="services-heading" class="t-h2 mt-5">
+            One studio for the whole product.
+          </h2>
+        </div>
+        <div class="lg:pb-2" data-reveal style="--reveal-delay:100ms">
+          <p class="t-lead max-w-xl text-ink-500">
+            Most projects need the same five things: an interface, an API, a
+            database, a deployment and somebody to keep it alive. We cover all
+            five, so there is no gap between the team that designs it and the
+            team that runs it.
+          </p>
+          <a href="/services" class="link-arrow mt-6 text-brand-600 hover:text-brand-700">
+            All services
+            <Icon name="arrow-right" size={14} />
+          </a>
+        </div>
+      </div>
+
+      <ul class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          services.map((service, index) => (
+            <li class="card card-lift group" data-reveal style={`--reveal-delay:${index * 60}ms`}>
+              <span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-inset ring-brand-100 transition-colors duration-300 group-hover:bg-brand-500 group-hover:text-ink-950 group-hover:ring-brand-500">
+                <Icon name={service.icon} size={20} />
+              </span>
+              <h3 class="t-h3 mt-6">{service.title}</h3>
+              <p class="mt-3 text-[14px] leading-[1.7] text-ink-500">{service.body}</p>
+              <ul class="mt-5 flex flex-wrap gap-1.5">
+                {service.points.map((point) => (
+                  <li class="chip">{point}</li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" class="section hairline bg-ink-50" aria-labelledby="work-heading">
+    <div class="wrap">
+      <div class="flex flex-wrap items-end justify-between gap-6" data-reveal>
+        <div>
+          <p class="eyebrow text-brand-600">Selected work</p>
+          <h2 id="work-heading" class="t-h2 mt-5">Products in production.</h2>
+        </div>
+        <a href="/contact" class="link-arrow text-ink-500 hover:text-ink-950">
+          Talk about yours
+          <Icon name="arrow-up-right" size={14} />
+        </a>
+      </div>
+
+      <div class="mt-12 grid gap-6 lg:grid-cols-2">
+        {
+          work.map((project, index) => (
+            <article
+              class={`group overflow-hidden rounded-[26px] border border-ink-100 bg-white transition-all duration-500 hover:-translate-y-1 hover:border-ink-200 hover:shadow-[0_36px_80px_-46px_rgba(6,9,12,0.55)] ${
+                index === 2 ? 'lg:col-span-2' : ''
+              }`}
+              data-reveal
+              style={`--reveal-delay:${index * 80}ms`}
+            >
+              <div class="overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.alt}
+                  width="1200"
+                  height="800"
+                  class={`w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] ${
+                    index === 2 ? 'aspect-[16/7]' : 'aspect-[16/10]'
+                  }`}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class={`p-7 ${index === 2 ? 'lg:flex lg:items-end lg:justify-between lg:gap-12' : ''}`}>
+                <div>
+                  <div class="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-400">
+                    <span class="text-brand-600">{project.tag}</span>
+                    <span class="h-3 w-px bg-ink-200"></span>
+                    <span>{project.year}</span>
+                  </div>
+                  <h3 class="t-h3 mt-3 text-[22px]">{project.name}</h3>
+                  <p class={`mt-3 text-[14px] leading-[1.7] text-ink-500 ${index === 2 ? 'max-w-2xl' : ''}`}>
+                    {project.body}
+                  </p>
+                </div>
+                {index === 2 && (
+                  <a href="/contact" class="link-arrow mt-6 shrink-0 text-brand-600 hover:text-brand-700 lg:mt-0">
+                    Discuss a similar build
+                    <Icon name="arrow-right" size={14} />
+                  </a>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="section" aria-labelledby="process-heading">
+    <div class="wrap">
+      <div class="max-w-2xl" data-reveal>
+        <p class="eyebrow text-brand-600">How we work</p>
+        <h2 id="process-heading" class="t-h2 mt-5">No surprises, no black boxes.</h2>
+        <p class="t-lead mt-5 text-ink-500">
+          You always know which stage the work is at, what comes next, and what
+          it costs.
         </p>
       </div>
-      <a href="/contact" class="text-[13px] uppercase tracking-[0.09em] text-brand-600 no-underline transition-colors hover:text-brand-700">
-        Talk about yours &rarr;
-      </a>
-    </div>
 
-    <div class="mt-12 space-y-16">
-      {
-        work.map((project) => (
-          <article>
-            <img
-              src={project.image}
-              alt={project.alt}
-              width="1000"
-              height="620"
-              class="w-full max-w-3xl object-cover"
-              loading="lazy"
-              decoding="async"
-            />
-            <div class="mt-6 max-w-3xl">
-              <h3 class="h-card text-[25px]">
-                <a href="/contact" class="u-title">{project.name}</a>
-              </h3>
-              <p class="mt-3 text-[11px] uppercase tracking-[0.12em] text-ink-300">
-                {project.tag}
-              </p>
-              <p class="mt-4 text-[13px] leading-[23px] text-ink-500">{project.body}</p>
-            </div>
-          </article>
-        ))
-      }
+      <ol class="mt-14 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          process.map((item, index) => (
+            <li class="relative border-t border-ink-200 pt-6" data-reveal style={`--reveal-delay:${index * 70}ms`}>
+              <span class="absolute -top-[5px] left-0 h-[9px] w-[9px] rounded-full bg-brand-500 ring-4 ring-white" />
+              <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-600">
+                {item.step}
+              </span>
+              <h3 class="t-h3 mt-4">{item.title}</h3>
+              <p class="mt-3 text-[14px] leading-[1.7] text-ink-500">{item.body}</p>
+            </li>
+          ))
+        }
+      </ol>
     </div>
   </section>
 
-  <!-- Process — centred heading with the rule running off to the right, then a
-       4-up grid, as in the template's "We provide awesomness" block. -->
-  <section class="wrap py-16 sm:py-20" aria-labelledby="process-heading">
-    <div class="flex items-center gap-8">
-      <h2 id="process-heading" class="h-section shrink-0 text-[26px] sm:text-[30px]">
-        How we work
-      </h2>
-      <hr class="rule flex-1" />
-    </div>
-    <p class="mt-4 max-w-2xl text-[13px] leading-[23px] text-ink-500">
-      No surprises. You always know what stage we are at and what comes next.
-    </p>
+  <!-- Principles -->
+  <section class="relative overflow-hidden bg-ink-950 text-white">
+    <div class="pointer-events-none absolute inset-0 bg-grid opacity-40" aria-hidden="true"></div>
+    <div class="wrap relative grid gap-12 py-20 lg:grid-cols-[0.8fr_1.2fr] lg:py-24">
+      <div data-reveal>
+        <p class="eyebrow text-brand-300">Why us</p>
+        <h2 class="t-h2 mt-5 text-white">Small on purpose.</h2>
+        <p class="mt-5 max-w-sm text-[15px] leading-[1.75] text-white/55">
+          A small team means the person you explain the problem to is the person
+          writing the code.
+        </p>
+        <a href="/about" class="btn btn-ghost mt-8">
+          More about the studio
+          <Icon name="arrow-right" size={15} />
+        </a>
+      </div>
 
-    <ol class="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-      {
-        process.map((item) => (
-          <li class="border-t border-ink-100 pt-6">
-            <span class="block text-[40px] font-light leading-none text-brand-200">
-              {item.step}
-            </span>
-            <h3 class="h-card mt-5 text-[21px]">
-              <span class="u-title">{item.title}</span>
-            </h3>
-            <p class="mt-3 text-[13px] leading-[23px] text-ink-500">{item.body}</p>
-          </li>
-        ))
-      }
-    </ol>
-  </section>
-
-  <!-- CTA — the green band again, closing the page before the footer. -->
-  <section class="band-green pattern-geo">
-    <div class="wrap py-16 text-center sm:py-20">
-      <h2 class="h-section text-[26px] text-white sm:text-[30px]">
-        Have something that needs building?
-      </h2>
-      <p class="mx-auto mt-4 max-w-xl text-[13px] leading-[23px] text-white/75">
-        Tell us what you are trying to do. If we are not the right fit, we will
-        say so.
-      </p>
-      <a href="/contact" class="btn-outline mt-9">Get in touch</a>
+      <ul class="grid gap-px overflow-hidden rounded-[26px] border border-white/10 bg-white/10 sm:grid-cols-3 lg:mt-2">
+        {
+          principles.map((item, index) => (
+            <li class="bg-ink-950 p-7" data-reveal style={`--reveal-delay:${index * 80}ms`}>
+              <Icon name={item.icon} size={22} class="text-brand-300" />
+              <h3 class="mt-5 font-display text-[15px] font-medium text-white">{item.title}</h3>
+              <p class="mt-2.5 text-[13.5px] leading-[1.7] text-white/50">{item.body}</p>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 
-  <!-- Contact strip — three ruled columns, as in the original footer lead-in. -->
-  <section class="wrap grid gap-8 py-14 sm:grid-cols-3" aria-label="Contact details">
-    <div>
-      <h3 class="text-[13px] uppercase tracking-[0.09em] text-ink-300">Email us</h3>
-      <a
-        href="mailto:info@dzdevelopers.com"
-        class="mt-2 inline-block border-b border-brand-200 pb-0.5 text-[18px] font-light text-brand-600 no-underline transition-colors hover:border-brand-600 hover:text-brand-700"
-      >
-        info@dzdevelopers.com
-      </a>
-    </div>
-    <div>
-      <h3 class="text-[13px] uppercase tracking-[0.09em] text-ink-300">Start a project</h3>
-      <a
-        href="/contact"
-        class="mt-2 inline-block border-b border-brand-200 pb-0.5 text-[18px] font-light text-brand-600 no-underline transition-colors hover:border-brand-600 hover:text-brand-700"
-      >
-        Tell us about the work
-      </a>
-    </div>
-    <div>
-      <h3 class="text-[13px] uppercase tracking-[0.09em] text-ink-300">Where we are</h3>
-      <p class="mt-2 text-[18px] font-light text-brand-600">Algeria — working remotely</p>
+  <CtaBand title="Have something that needs building?" />
+
+  <!-- Contact strip -->
+  <section class="hairline" aria-label="Contact details">
+    <div class="wrap grid gap-8 py-14 sm:grid-cols-3">
+      <div>
+        <h2 class="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-400">Email us</h2>
+        <a
+          href="mailto:info@dzdevelopers.com"
+          class="mt-3 inline-block font-display text-[17px] font-medium text-ink-950 no-underline transition-colors hover:text-brand-600"
+        >
+          info@dzdevelopers.com
+        </a>
+      </div>
+      <div>
+        <h2 class="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-400">Start a project</h2>
+        <a
+          href="/contact"
+          class="mt-3 inline-block font-display text-[17px] font-medium text-ink-950 no-underline transition-colors hover:text-brand-600"
+        >
+          Tell us about the work
+        </a>
+      </div>
+      <div>
+        <h2 class="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-400">Where we are</h2>
+        <p class="mt-3 font-display text-[17px] font-medium text-ink-950">
+          Algeria — working remotely
+        </p>
+      </div>
     </div>
   </section>
 </Base>

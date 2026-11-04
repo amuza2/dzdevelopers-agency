@@ -1,5 +1,7 @@
 ---
-/* Closing green band, reused at the foot of every page. */
+import Icon from './Icon.astro'
+
+/* Closing call-to-action, reused at the foot of every page. */
 interface Props {
   title: string
   lead?: string
@@ -7,19 +9,41 @@ interface Props {
   label?: string
 }
 
-const { title, lead, href = '/contact', label = 'Get in touch' } = Astro.props
+const {
+  title,
+  lead = 'Tell us what you are trying to build. If we are not the right fit, we will say so.',
+  href = '/contact',
+  label = 'Start a project',
+} = Astro.props
 ---
 
-<section class="band-green pattern-geo">
-  <div class="wrap py-16 text-center sm:py-20">
-    <h2 class="h-section text-[26px] text-white sm:text-[30px]">{title}</h2>
-    {
-      lead && (
-        <p class="mx-auto mt-4 max-w-xl text-[13px] leading-[23px] text-white/75">
-          {lead}
-        </p>
-      )
-    }
-    <a href={href} class="btn-outline mt-9">{label}</a>
+<section class="wrap pb-20 lg:pb-28">
+  <div
+    class="relative overflow-hidden rounded-[32px] bg-ink-950 px-6 py-16 text-center sm:px-12 sm:py-20"
+    data-reveal
+  >
+    <div class="pointer-events-none absolute inset-0 bg-grid opacity-60" aria-hidden="true"></div>
+    <div
+      class="pointer-events-none absolute -bottom-40 left-1/2 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-brand-500/25 blur-[130px]"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div class="relative">
+      <p class="eyebrow justify-center text-brand-300">Next step</p>
+      <h2 class="t-h2 mx-auto mt-5 max-w-2xl text-white">{title}</h2>
+      <p class="mx-auto mt-5 max-w-xl text-[15px] leading-[1.75] text-white/55">{lead}</p>
+
+      <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+        <a href={href} class="btn btn-primary">
+          {label}
+          <Icon name="arrow-right" size={16} />
+        </a>
+        <a href="mailto:info@dzdevelopers.com" class="btn btn-ghost">
+          <Icon name="mail" size={16} />
+          Email us
+        </a>
+      </div>
+    </div>
   </div>
 </section>

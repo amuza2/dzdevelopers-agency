@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000" role="img" aria-labelledby="st1 st2">
+  <title id="st1">Studio system map</title>
+  <desc id="st2">An abstract diagram of connected services: client apps, an API layer and a database, drawn in emerald on a light grid.</desc>
+  <defs>
+    <linearGradient id="stbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7faf9"/><stop offset=".6" stop-color="#eef5f2"/><stop offset="1" stop-color="#e4efee"/>
+    </linearGradient>
+    <linearGradient id="stpanel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#16b97f"/><stop offset="1" stop-color="#0a7b54"/>
+    </linearGradient>
+    <radialGradient id="stglow" cx=".5" cy=".45" r=".55">
+      <stop offset="0" stop-color="#38cf98" stop-opacity=".35"/><stop offset="1" stop-color="#38cf98" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="stgrid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M50 0H0v50" fill="none" stroke="#0b1015" stroke-opacity=".06"/>
+    </pattern>
+  </defs>
+
+  <rect width="1000" height="1000" fill="url(#stbg)"/>
+  <rect width="1000" height="1000" fill="url(#stgrid)"/>
+  <rect width="1000" height="1000" fill="url(#stglow)"/>
+
+  <g stroke="#0c9a68" stroke-opacity=".45" stroke-width="2" fill="none" stroke-dasharray="7 8">
+    <path d="M250 300C370 300 380 430 500 430"/>
+    <path d="M250 700C370 700 380 570 500 570"/>
+    <path d="M500 430C620 430 630 300 750 300"/>
+    <path d="M500 570C620 570 630 700 750 700"/>
+    <path d="M500 430v140"/>
+  </g>
+
+  <g>
+    <rect x="150" y="250" width="200" height="100" rx="22" fill="#ffffff" stroke="#0b1015" stroke-opacity=".08"/>
+    <rect x="174" y="278" width="34" height="34" rx="10" fill="url(#stpanel)"/>
+    <rect x="220" y="284" width="96" height="10" rx="5" fill="#0b1015" fill-opacity=".18"/>
+    <rect x="220" y="304" width="68" height="10" rx="5" fill="#0b1015" fill-opacity=".1"/>
+  </g>
+  <g>
+    <rect x="150" y="650" width="200" height="100" rx="22" fill="#ffffff" stroke="#0b1015" stroke-opacity=".08"/>
+    <rect x="174" y="678" width="34" height="52" rx="10" fill="#0b1015" fill-opacity=".82"/>
+    <rect x="220" y="684" width="88" height="10" rx="5" fill="#0b1015" fill-opacity=".18"/>
+    <rect x="220" y="704" width="56" height="10" rx="5" fill="#0b1015" fill-opacity=".1"/>
+  </g>
+  <g>
+    <rect x="650" y="250" width="200" height="100" rx="22" fill="#ffffff" stroke="#0b1015" stroke-opacity=".08"/>
+    <circle cx="690" cy="300" r="18" fill="#16b97f" fill-opacity=".2"/>
+    <circle cx="690" cy="300" r="7" fill="#0c9a68"/>
+    <rect x="722" y="284" width="92" height="10" rx="5" fill="#0b1015" fill-opacity=".18"/>
+    <rect x="722" y="304" width="64" height="10" rx="5" fill="#0b1015" fill-opacity=".1"/>
+  </g>
+  <g>
+    <rect x="650" y="650" width="200" height="100" rx="22" fill="#ffffff" stroke="#0b1015" stroke-opacity=".08"/>
+    <g fill="#16b97f" fill-opacity=".75">
+      <rect x="676" y="694" width="10" height="24" rx="4"/>
+      <rect x="694" y="682" width="10" height="36" rx="4"/>
+      <rect x="712" y="700" width="10" height="18" rx="4"/>
+      <rect x="730" y="674" width="10" height="44" rx="4"/>
+    </g>
+    <rect x="760" y="684" width="66" height="10" rx="5" fill="#0b1015" fill-opacity=".16"/>
+    <rect x="760" y="704" width="46" height="10" rx="5" fill="#0b1015" fill-opacity=".1"/>
+  </g>
+
+  <rect x="410" y="400" width="180" height="200" rx="26" fill="url(#stpanel)"/>
+  <rect x="440" y="436" width="120" height="12" rx="6" fill="#ffffff" fill-opacity=".8"/>
+  <rect x="440" y="462" width="84" height="10" rx="5" fill="#ffffff" fill-opacity=".45"/>
+  <rect x="440" y="500" width="120" height="34" rx="10" fill="#ffffff" fill-opacity=".18"/>
+  <g fill="#ffffff" fill-opacity=".55">
+    <circle cx="456" cy="556" r="6"/>
+    <circle cx="480" cy="556" r="6"/>
+    <circle cx="504" cy="556" r="6"/>
+    <circle cx="528" cy="556" r="6"/>
+  </g>
+
+  <g fill="#0c9a68">
+    <circle cx="250" cy="300" r="5"/><circle cx="500" cy="430" r="5"/>
+    <circle cx="750" cy="300" r="5"/><circle cx="250" cy="700" r="5"/>
+    <circle cx="500" cy="570" r="5"/><circle cx="750" cy="700" r="5"/>
+  </g>
+</svg>
