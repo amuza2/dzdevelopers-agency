@@ -1,12 +1,12 @@
 ---
 /*
-  The full-width photograph that breaks up a page — a "band" with a picture
+  The full-width picture that breaks up a page — a "band" with an image
   instead of a flat colour. Purely decorative, so it is hidden from assistive
   technology and never carries a heading.
 
-  `position` controls which slice of the image survives the crop; the default
-  keeps the subject's face in frame for section_bg.jpeg (the source is only
-  1024x682, so a 1440px band shows the top third of it).
+  The default is the studio artwork (skyline plus green facets): at 1920px wide
+  it fills a 1440px band without being upscaled, and its own contrast carries
+  the band, so no overlay is needed.
 */
 interface Props {
   image?: string
@@ -16,8 +16,8 @@ interface Props {
 }
 
 const {
-  image = '/images/section_bg.jpeg',
-  position = 'object-[50%_6%]',
+  image = '/images/home_agency_section_2.jpg',
+  position = 'object-[50%_45%]',
   height = 'h-[240px] sm:h-[360px]',
   alt = '',
 } = Astro.props
