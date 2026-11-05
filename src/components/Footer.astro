@@ -1,6 +1,6 @@
 ---
 import Address from './Address.astro'
-import { EMAIL, PHONES } from '../data/contact'
+import { EMAIL, PHONE } from '../data/contact'
 
 const year = new Date().getFullYear()
 
@@ -69,19 +69,25 @@ const columns = [
         {EMAIL}
       </a>
 
-      <ul class="mt-3 space-y-1">
-        {
-          PHONES.map((phone) => (
-            <li>
-              <a
-                href={`tel:${phone.tel}`}
-                class="text-[14px] text-ink-400 no-underline transition-colors duration-300 hover:text-white"
-              >
-                {phone.display}
-              </a>
-            </li>
-          ))
-        }
+      <ul class="mt-3 space-y-1.5">
+        <li>
+          <a
+            href={`tel:${PHONE.tel}`}
+            class="text-[14px] text-ink-400 no-underline transition-colors duration-300 hover:text-white"
+          >
+            {PHONE.display}
+          </a>
+        </li>
+        <li>
+          <a
+            href={PHONE.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-[14px] text-ink-400 no-underline transition-colors duration-300 hover:text-white"
+          >
+            WhatsApp
+          </a>
+        </li>
       </ul>
 
       <div class="mt-5 text-[13px] leading-[1.9] text-ink-500">
