@@ -9,12 +9,23 @@ import CtaBand from '../components/CtaBand.astro'
 */
 const members = [
   {
+    label: 'Founder',
     name: 'Mohammed Chami',
     role: 'Founder & Full-stack Engineer',
     bio: 'Builds and maintains applications end to end — Django, Vue, Flutter, PostgreSQL and the deployment pipeline behind them. Works directly with every client, from the first call to the release.',
     links: [
       { href: 'https://github.com/amuza2', label: 'GitHub' },
       { href: 'https://www.linkedin.com/in/mohammed-chami-dev/', label: 'LinkedIn' },
+    ],
+  },
+  {
+    label: 'Team',
+    name: 'Abdel Illah B.',
+    role: 'Cloud & Infrastructure Engineer',
+    bio: 'Building production-ready systems with modern cloud infrastructure.',
+    links: [
+      { href: 'https://www.linkedin.com/in/abdelillahbel', label: 'LinkedIn' },
+      { href: 'https://www.abdelillah.site/', label: 'Website' },
     ],
   },
 ]
@@ -49,12 +60,16 @@ const collaboration = [
   />
 
   <section class="section">
-    <div class="wrap">
+    <div class="wrap space-y-16 lg:space-y-20">
       {
-        members.map((member) => (
-          <article class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16" data-reveal>
+        members.map((member, index) => (
+          <article
+            class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16"
+            data-reveal
+            style={`--reveal-delay:${index * 80}ms`}
+          >
             <div class="border-t border-ink-200 pt-6">
-              <p class="eyebrow text-ink-400">Founder</p>
+              <p class="eyebrow text-ink-400">{member.label}</p>
               <h2 class="t-h2 mt-4 text-[28px] sm:text-[34px]">{member.name}</h2>
               <p class="mt-3 text-[11px] uppercase tracking-[0.18em] text-brand-500">{member.role}</p>
             </div>

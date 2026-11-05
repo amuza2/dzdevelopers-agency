@@ -1,0 +1,17 @@
+---
+/*
+  The studio address, in one place so the footer, the about page and the
+  structured data never drift apart.
+*/
+interface Props {
+  class?: string
+}
+
+const { class: className = '' } = Astro.props
+---
+
+<address class={`not-italic ${className}`}>
+  Cité HM, 3e étage<br />
+  Hadjout, Tipaza<br />
+  Algeria
+</address>

@@ -1,4 +1,6 @@
 ---
+import Address from './Address.astro'
+
 const year = new Date().getFullYear()
 
 const columns = [
@@ -86,7 +88,9 @@ const socials = [
       >
         info@dzdevelopers.com
       </a>
-      <p class="mt-5 text-[13px] text-ink-500">Algeria — working remotely</p>
+      <div class="mt-5 text-[13px] leading-[1.9] text-ink-500">
+        <Address />
+      </div>
     </div>
   </div>
 

@@ -2,6 +2,8 @@
 import Base from '../layouts/Base.astro'
 import PageHeader from '../components/PageHeader.astro'
 import CtaBand from '../components/CtaBand.astro'
+import Address from '../components/Address.astro'
+import Icon from '../components/Icon.astro'
 
 const values = [
   {
@@ -88,6 +90,39 @@ const facts = [
       }
     </dl>
   </div>
+
+  <!-- Where the studio is -->
+  <section class="section" aria-labelledby="location-heading">
+    <div class="wrap grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+      <div data-reveal>
+        <p class="eyebrow text-ink-400">Find us</p>
+        <h2 id="location-heading" class="t-h2 mt-4">The studio in Hadjout</h2>
+
+        <Address class="mt-6 text-[15px] leading-[1.9] text-ink-500" />
+
+        <a
+          href="https://www.google.com/maps?q=36.50607717760867,2.4175567190652605"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-more mt-6 text-brand-500 hover:text-brand-700"
+        >
+          Open in Google Maps
+          <Icon name="arrow-up-right" size={14} />
+        </a>
+      </div>
+
+      <div class="border border-ink-200" data-reveal style="--reveal-delay:100ms">
+        <iframe
+          src="https://www.google.com/maps?q=36.50607717760867,2.4175567190652605&z=15&hl=en&output=embed"
+          title="Map showing the DZ Developers studio in Hadjout, Tipaza"
+          class="h-[320px] w-full border-0 sm:h-[420px]"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
 
   <!-- Values on the light lattice band. -->
   <section class="band-light pattern-geo-light" aria-labelledby="values-heading">
