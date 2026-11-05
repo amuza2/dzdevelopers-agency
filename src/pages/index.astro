@@ -81,22 +81,29 @@ const process = [
       class="absolute inset-0 -z-10 h-full w-full object-cover object-[50%_30%]"
       aria-hidden="true"
     />
-    <div class="absolute inset-0 -z-10 bg-ink-900/75" aria-hidden="true"></div>
+    <div class="absolute inset-0 -z-10 bg-ink-900/20" aria-hidden="true"></div>
+    <!-- Dark enough behind the headline to carry white type, light at the edges so
+         the photograph still reads as a photograph. -->
     <div
-      class="absolute inset-0 -z-10 bg-gradient-to-b from-ink-900/45 via-transparent to-ink-900/75"
+      class="absolute inset-0 -z-10 bg-[radial-gradient(78%_65%_at_50%_42%,rgba(20,20,20,0.78)_0%,rgba(20,20,20,0.52)_48%,rgba(20,20,20,0.1)_100%)]"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-transparent to-ink-900/80"
       aria-hidden="true"
     >
     </div>
 
     <div class="wrap relative py-24 text-center sm:py-32">
-      <p class="eyebrow text-brand-200" data-reveal>Web &amp; mobile product studio</p>
+      <p class="eyebrow hero-type text-brand-200" data-reveal>Web &amp; mobile product studio</p>
 
-      <h1 class="t-hero mx-auto mt-6 max-w-4xl text-white" data-reveal style="--reveal-delay:70ms">
+      <h1 class="t-hero hero-type mx-auto mt-6 max-w-4xl text-white" data-reveal style="--reveal-delay:70ms">
         We build software that brings usability, beauty and great impact.
       </h1>
 
       <p
-        class="t-lead mx-auto mt-7 max-w-2xl text-white/80"
+        class="t-lead hero-type mx-auto mt-7 max-w-2xl text-white/85"
         data-reveal
         style="--reveal-delay:140ms"
       >
