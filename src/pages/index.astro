@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro'
 import Icon from '../components/Icon.astro'
 import CtaBand from '../components/CtaBand.astro'
+import PhotoStrip from '../components/PhotoStrip.astro'
 import { EMAIL } from '../data/contact'
 
 const services = [
@@ -198,17 +199,7 @@ const process = [
   </section>
 
   <!-- Full-width photograph, as the template puts between sections. -->
-  <section class="relative isolate overflow-hidden bg-ink-900" aria-hidden="true">
-    <img
-      src="/images/home_agency_section_2.jpg"
-      alt=""
-      width="1920"
-      height="867"
-      class="h-[240px] w-full object-cover sm:h-[360px]"
-      loading="lazy"
-      decoding="async"
-    />
-  </section>
+  <PhotoStrip />
 
   <!-- The studio -->
   <section class="band-light pattern-geo-light" aria-labelledby="office-heading">

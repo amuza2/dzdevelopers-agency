@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro'
 import PageHeader from '../components/PageHeader.astro'
+import PhotoStrip from '../components/PhotoStrip.astro'
 import { EMAIL, PHONES } from '../data/contact'
 
 const details = [
@@ -116,21 +117,7 @@ const field =
   </section>
 
   <!-- Studio photograph to close the page, as the template does. -->
-  <section class="band-light">
-    <div class="wrap py-16">
-      <figure class="overflow-hidden" data-reveal>
-        <img
-          src="/images/home_agency_section_2.jpg"
-          alt="The city the studio works from, with the studio's geometric motif"
-          width="1920"
-          height="867"
-          class="h-[260px] w-full object-cover sm:h-[340px]"
-          loading="lazy"
-          decoding="async"
-        />
-      </figure>
-    </div>
-  </section>
+  <PhotoStrip height="h-[260px] sm:h-[340px]" />
 </Base>
 
 <script>

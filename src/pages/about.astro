@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro'
 import PageHeader from '../components/PageHeader.astro'
 import CtaBand from '../components/CtaBand.astro'
+import PhotoStrip from '../components/PhotoStrip.astro'
 import Address from '../components/Address.astro'
 import Icon from '../components/Icon.astro'
 
@@ -65,17 +66,7 @@ const facts = [
   </section>
 
   <!-- Full-width photograph, as the template puts between sections. -->
-  <section class="relative isolate overflow-hidden bg-ink-900" aria-hidden="true">
-    <img
-      src="/images/home_agency_section_2.jpg"
-      alt=""
-      width="1920"
-      height="867"
-      class="h-[220px] w-full object-cover sm:h-[340px]"
-      loading="lazy"
-      decoding="async"
-    />
-  </section>
+  <PhotoStrip height="h-[220px] sm:h-[340px]" />
 
   <!-- Facts, ruled like the template's metadata rows. -->
   <div class="border-y border-ink-100">
