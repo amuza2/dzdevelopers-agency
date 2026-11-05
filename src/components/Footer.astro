@@ -22,11 +22,6 @@ const columns = [
     ],
   },
 ]
-
-const socials = [
-  { href: 'https://github.com/amuza2', label: 'GitHub' },
-  { href: 'https://www.linkedin.com/in/mohammed-chami-dev/', label: 'LinkedIn' },
-]
 ---
 
 <footer class="band-dark border-t border-white/[0.08]">
@@ -40,22 +35,6 @@ const socials = [
         A software studio building web and mobile products — and the
         infrastructure that keeps them running.
       </p>
-      <ul class="mt-6 space-y-2">
-        {
-          socials.map((social) => (
-            <li>
-              <a
-                href={social.href}
-                rel="noopener noreferrer"
-                target="_blank"
-                class="text-[12px] uppercase tracking-[0.14em] text-ink-400 no-underline transition-colors duration-300 hover:text-brand-500"
-              >
-                {social.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
     </div>
 
     {
