@@ -11,6 +11,14 @@ const details = [
 
 const field =
   'mt-2 w-full border border-ink-200 bg-white px-4 py-3 font-sans text-[15px] text-ink-700 outline-none transition-colors duration-300 focus:border-brand-500'
+
+/*
+  Web3Forms access key — free, no account needed: go to https://web3forms.com,
+  enter support@dzdevelopers.com, and the key arrives by email. Paste it between
+  the quotes below. Until it is set, the form falls back to opening the
+  visitor's mail client, so nothing silently breaks.
+*/
+const FORM_ACCESS_KEY = ''
 ---
 
 <Base
@@ -28,11 +36,26 @@ const field =
       <div data-reveal>
         <h2 class="font-display text-[21px] font-light text-ink-700">Start the conversation</h2>
         <p class="mt-2 text-[14px] leading-[1.85] text-ink-500">
-          No form service, no tracking — this composes an email from your own
-          mail client.
+          Goes straight to our inbox. We reply within one working day.
         </p>
 
-        <form id="contact-form" class="mt-8 space-y-6" data-email={EMAIL} novalidate>
+        <form
+          id="contact-form"
+          class="mt-8 space-y-6"
+          data-email={EMAIL}
+          data-endpoint="https://api.web3forms.com/submit"
+          data-access-key={FORM_ACCESS_KEY}
+          novalidate
+        >
+          <!-- Honeypot: bots fill this, humans never see it. -->
+          <input
+            type="text"
+            name="_honey"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+            class="absolute h-0 w-0 overflow-hidden opacity-0"
+          />
           <div class="grid gap-6 sm:grid-cols-2">
             <div>
               <label for="name" class="text-[10.5px] uppercase tracking-[0.2em] text-ink-400">
@@ -77,14 +100,14 @@ const field =
           </div>
 
           <div class="flex flex-wrap items-center gap-5">
-            <button type="submit" class="btn btn-solid">Send message</button>
+            <button type="submit" data-submit class="btn btn-solid">Send message</button>
             <p id="form-status" class="text-[13px] text-ink-500" role="status" aria-live="polite"></p>
           </div>
         </form>
 
         <noscript>
           <p class="mt-6 border border-ink-200 bg-ink-50 p-4 text-[13.5px] text-ink-600">
-            JavaScript is off, so the form cannot compose an email. Write to
+            JavaScript is off, so the form cannot be sent. Write to
             <a class="text-brand-500 underline" href={`mailto:${EMAIL}`}>{EMAIL}</a>
             directly.
           </p>
@@ -121,15 +144,25 @@ const field =
 </Base>
 
 <script>
-  // No backend: compose a mailto so the form is genuinely functional.
+  // The site is static, so submissions go to a form relay which emails the
+  // address in data-endpoint. Swapping providers is a one-line change here.
   function bindContactForm() {
     const form = document.getElementById('contact-form') as HTMLFormElement | null
     const status = document.getElementById('form-status')
+    const submit = form?.querySelector<HTMLButtonElement>('[data-submit]') ?? null
     if (!form || form.dataset.bound === 'true') return
 
     form.dataset.bound = 'true'
 
-    form.addEventListener('submit', (event) => {
+    const say = (text: string, tone: 'muted' | 'ok' | 'error' = 'muted') => {
+      if (!status) return
+      status.textContent = text
+      status.classList.toggle('text-brand-600', tone === 'ok')
+      status.classList.toggle('text-ink-500', tone === 'muted')
+      status.classList.toggle('text-red-700', tone === 'error')
+    }
+
+    form.addEventListener('submit', async (event) => {
       event.preventDefault()
 
       const data = new FormData(form)
@@ -143,12 +176,61 @@ const field =
         return
       }
 
-      const subject = encodeURIComponent(`${kind} — enquiry from ${name}`)
-      const body = encodeURIComponent(`${message}\n\nProject type: ${kind}\n\n— ${name} (${email})`)
-
-      if (status) status.textContent = 'Opening your mail client…'
+      const endpoint = form.dataset.endpoint
+      const accessKey = (form.dataset.accessKey || '').trim()
       const to = form.dataset.email || 'support@dzdevelopers.com'
-      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`
+
+      // Last-resort path: hand the message to the visitor's mail client. Used
+      // when no access key is configured, and whenever the relay fails — an
+      // enquiry should never be lost because a third party is down.
+      const openMailClient = () => {
+        const subject = encodeURIComponent(`${kind} — enquiry from ${name}`)
+        const body = encodeURIComponent(
+          `${message}\n\nProject type: ${kind}\n\n— ${name} (${email})`,
+        )
+        say('Opening your mail client…')
+        window.location.href = `mailto:${to}?subject=${subject}&body=${body}`
+      }
+
+      if (!endpoint || !accessKey) {
+        openMailClient()
+        return
+      }
+
+      if (submit) submit.disabled = true
+      say('Sending…')
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: accessKey,
+            subject: `${kind} — enquiry from ${name}`,
+            from_name: 'DZ Developers website',
+            name,
+            email,
+            kind,
+            message,
+          }),
+        })
+
+        const result = (await response.json().catch(() => ({}))) as {
+          success?: boolean
+          message?: string
+        }
+
+        if (!response.ok || !result.success) {
+          throw new Error(result.message || `HTTP ${response.status}`)
+        }
+
+        form.reset()
+        say('Thanks — your message is on its way. We reply within one working day.', 'ok')
+      } catch (error) {
+        openMailClient()
+      } finally {
+        if (submit) submit.disabled = false
+      }
     })
   }
 
