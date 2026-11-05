@@ -1,15 +1,11 @@
 ---
 import Base from '../layouts/Base.astro'
 import PageHeader from '../components/PageHeader.astro'
+import { EMAIL, PHONES } from '../data/contact'
 
 const details = [
-  { label: 'Email', value: 'info@dzdevelopers.com', href: 'mailto:info@dzdevelopers.com' },
-  { label: 'GitHub', value: 'github.com/amuza2', href: 'https://github.com/amuza2' },
-  {
-    label: 'LinkedIn',
-    value: 'in/mohammed-chami-dev',
-    href: 'https://www.linkedin.com/in/mohammed-chami-dev/',
-  },
+  { label: 'Email', value: EMAIL, href: `mailto:${EMAIL}` },
+  ...PHONES.map((phone) => ({ label: 'Phone', value: phone.display, href: `tel:${phone.tel}` })),
 ]
 
 const field =
@@ -35,7 +31,7 @@ const field =
           mail client.
         </p>
 
-        <form id="contact-form" class="mt-8 space-y-6" novalidate>
+        <form id="contact-form" class="mt-8 space-y-6" data-email={EMAIL} novalidate>
           <div class="grid gap-6 sm:grid-cols-2">
             <div>
               <label for="name" class="text-[10.5px] uppercase tracking-[0.2em] text-ink-400">
@@ -88,7 +84,7 @@ const field =
         <noscript>
           <p class="mt-6 border border-ink-200 bg-ink-50 p-4 text-[13.5px] text-ink-600">
             JavaScript is off, so the form cannot compose an email. Write to
-            <a class="text-brand-500 underline" href="mailto:info@dzdevelopers.com">info@dzdevelopers.com</a>
+            <a class="text-brand-500 underline" href={`mailto:${EMAIL}`}>{EMAIL}</a>
             directly.
           </p>
         </noscript>
@@ -115,17 +111,6 @@ const field =
             ))
           }
         </ul>
-
-        <div class="mt-10">
-          <h3 class="text-[10.5px] uppercase tracking-[0.2em] text-ink-400">Helpful to include</h3>
-          <ul class="mt-4 space-y-2 text-[13.5px] leading-[1.9] text-ink-500">
-            <li>— What the product should do</li>
-            <li>— Whether anything already exists</li>
-            <li>— Your rough timeline and budget</li>
-          </ul>
-        </div>
-
-        <p class="mt-8 text-[13px] text-ink-400">Algeria — working remotely, CET</p>
       </aside>
     </div>
   </section>
@@ -175,7 +160,8 @@ const field =
       const body = encodeURIComponent(`${message}\n\nProject type: ${kind}\n\n— ${name} (${email})`)
 
       if (status) status.textContent = 'Opening your mail client…'
-      window.location.href = `mailto:info@dzdevelopers.com?subject=${subject}&body=${body}`
+      const to = form.dataset.email || 'support@dzdevelopers.com'
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`
     })
   }
 
